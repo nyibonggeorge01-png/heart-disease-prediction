@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Health Assessment | Predictive Analysis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --accent-color: #3498db;
+            --light-bg: #f8f9fa;
+            --dark-text: #2c3e50;
+            --light-text: #7f8c8d;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #e8f5e9 !important;
+            color: var(--dark-text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1505751172876-fa186e9b3c43?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 20px 30px;
+            border: none;
+        }
+        
+        .card-body {
+            padding: 30px;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: var(--dark-text);
+            margin-bottom: 8px;
+        }
+        
+        .form-control, .form-select {
+            padding: 12px 15px;
+            border: 1px solid #e1e5ee;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-color), #2980b9);
+            border: none;
+            padding: 12px 35px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(41, 128, 185, 0.3);
+        }
+        
+        .result-card {
+            display: none;
+            margin-top: 20px;
+            border-left: 5px solid var(--accent-color);
+        }
+        
+        .result-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+        
+        .feature-box {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Heart Health Assessment</h1>
+            <p class="hero-subtitle">Advanced predictive analysis tool that helps assess your risk of heart disease based on key health indicators. Get instant insights to take control of your heart health.</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="container mb-5">
+        <div class="row text-center mb-5">
+            <div class="col-md-8 mx-auto">
+                <h2 class="mb-4">Why Check Your Heart Health?</h2>
+                <p class="text-muted">Early detection of heart disease risk factors can lead to better outcomes and improved quality of life.</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h4>Early Detection</h4>
+                    <p class="text-muted">Identify potential risk factors before they become serious health issues.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>Data-Driven</h4>
+                    <p class="text-muted">Our algorithm analyzes multiple health indicators for accurate assessment.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h4>Privacy Focused</h4>
+                    <p class="text-muted">Your health data remains confidential and secure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prediction Form -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="mb-0"><i class="fas fa-heartbeat me-2"></i>Heart Disease Risk Assessment</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="predictionForm">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="age" class="form-label">Age</label>
+                                    <input type="number" class="form-control" id="age" required min="18" max="120">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="sex" class="form-label">Sex</label>
+                                    <select class="form-select" id="sex" required>
+                                        <option value="">Select...</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="cholesterol" class="form-label">Cholesterol (mg/dl)</label>
+                                    <input type="number" class="form-control" id="cholesterol" required min="100" max="600">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="cigarettes_per_day" class="form-label">Cigarettes per Day</label>
+                                    <input type="number" class="form-control" id="cigarettes_per_day" required min="0" max="100">
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="family_history" class="form-label">Family History of Heart Disease</label>
+                                    <select class="form-select" id="family_history" required>
+                                        <option value="">Select...</option>
+                                        <option value="true">Yes</option>
+                                        <option value="false">No</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="chest_pain_type" class="form-label">Chest Pain Type</label>
+                                    <select class="form-select" id="chest_pain_type" required>
+                                        <option value="">Select...</option>
+                                        <option value="typical angina">Typical Angina</option>
+                                        <option value="atypical angina">Atypical Angina</option>
+                                        <option value="non-anginal pain">Non-anginal Pain</option>
+                                        <option value="asymptomatic">Asymptomatic</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label for="blood_sugar" class="form-label">Blood Sugar (mg/dl)</label>
+                                    <input type="number" class="form-control" id="blood_sugar" required min="50" max="500">
+                                </div>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg px-5" id="predictBtn">
+                                    <i class="fas fa-chart-pie me-2"></i>
+                                    <span id="buttonText">Analyze My Risk</span>
+                                    <span id="buttonSpinner" class="spinner-border spinner-border-sm ms-2 d-none" role="status" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <div class="card result-card mt-4">
+                            <div class="card-body text-center p-5">
+                                <div id="resultIcon" class="result-icon"></div>
+                                <h3 id="resultTitle" class="mb-3"></h3>
+                                <p id="resultText" class="lead mb-4"></p>
+                                <div id="confidenceMeter" class="progress mb-4" style="height: 10px; max-width: 300px; margin: 0 auto;">
+                                    <div id="confidenceBar" class="progress-bar bg-success" role="progressbar" style="width: 0%" 
+                                         aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p id="confidenceText" class="text-muted mb-4"></p>
+                                <p class="small text-muted mb-4">This assessment is for informational purposes only and is not a substitute for professional medical advice.</p>
+                                <button id="newPredictionBtn" class="btn btn-outline-primary px-4">
+                                    <i class="fas fa-redo me-2"></i>Start New Assessment
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5 py-4" style="background-color: #2c3e50; color: #fff;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-3">
+                    <h5 class="mb-3" style="font-weight: 600; font-size: 1.1rem; letter-spacing: 0.5px;">HEART DISEASE PREDICTION MODEL</h5>
+                    <div style="width: 80px; height: 3px; background: #4CAF50; margin: 0 auto 15px;"></div>
+                </div>
+                
+                <div class="col-md-8 mx-auto">
+                    <div class="text-center mb-3" style="font-family: 'Times New Roman', serif; font-size: 0.95rem; line-height: 1.6;">
+                        <p class="mb-1"><strong>NYIBONG GEORGE</strong></p>
+                        <p class="mb-1">ID: 253008008</p>
+                        <p class="mb-1">Faculty of Engineering and Natural Sciences</p>
+                        <p class="mb-3">Department of Power Electronics and Clean Energy System</p>
+                        <p class="mb-0" style="font-style: italic;">AIE504 - Machine Learning Project</p>
+                    </div>
+                </div>
+                
+                <div class="col-12 text-center mt-3 pt-3" style="border-top: 1px solid rgba(255,255,255,0.1);">
+                    <p class="small mb-0" style="opacity: 0.8; font-size: 0.85rem;">
+                        © 2025 Heart Disease Prediction Model. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const button = document.getElementById('predictBtn');
+            const buttonText = document.getElementById('buttonText');
+            const spinner = document.getElementById('buttonSpinner');
+            
+            button.disabled = true;
+            buttonText.textContent = 'Predicting...';
+            spinner.classList.remove('d-none');
+            
+            // Get form data
+            const formData = {
+                age: document.getElementById('age').value,
+                sex: document.getElementById('sex').value,
+                cholesterol: document.getElementById('cholesterol').value,
+                cigarettes_per_day: document.getElementById('cigarettes_per_day').value,
+                family_history: document.getElementById('family_history').value,
+                chest_pain_type: document.getElementById('chest_pain_type').value,
+                blood_sugar: document.getElementById('blood_sugar').value
+            };
+            
+            // Send prediction request
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Hide form and show result
+                document.getElementById('predictionForm').style.display = 'none';
+                const resultCard = document.querySelector('.result-card');
+                const resultTitle = document.getElementById('resultTitle');
+                const resultText = document.getElementById('resultText');
+                const confidenceText = document.getElementById('confidenceText');
+                const resultIcon = document.getElementById('resultIcon');
+                const confidenceBar = document.getElementById('confidenceBar');
+                
+                if (data.status === 'success') {
+                    const hasDisease = data.prediction === 1;
+                    const confidence = data.confidence ? Math.round(data.confidence * 10) / 10 : 'N/A';
+                    
+                    if (hasDisease) {
+                        resultTitle.textContent = 'Elevated Risk Detected';
+                        resultTitle.className = 'text-danger';
+                        resultIcon.className = 'result-icon text-danger';
+                        resultIcon.innerHTML = '<i class="fas fa-exclamation-triangle"></i>';
+                        resultText.innerHTML = 'Based on the information provided, our assessment indicates an <strong>elevated risk</strong> of heart disease. We recommend consulting with a healthcare professional for a comprehensive evaluation.';
+                        confidenceBar.className = 'progress-bar bg-danger';
+                    } else {
+                        resultTitle.textContent = 'Low Risk';
+                        resultTitle.className = 'text-success';
+                        resultIcon.className = 'result-icon text-success';
+                        resultIcon.innerHTML = '<i class="fas fa-check-circle"></i>';
+                        resultText.innerHTML = 'Based on the information provided, our assessment indicates a <strong>lower risk</strong> of heart disease. Continue maintaining a heart-healthy lifestyle with regular check-ups.';
+                        confidenceBar.className = 'progress-bar bg-success';
+                    }
+                    
+                    // Animate confidence meter
+                    confidenceBar.style.width = '0%';
+                    confidenceBar.setAttribute('aria-valuenow', confidence);
+                    setTimeout(() => {
+                        confidenceBar.style.width = `${confidence}%`;
+                    }, 100);
+                    
+                    confidenceText.innerHTML = `<i class="fas fa-chart-pie me-2"></i>Assessment Confidence: <strong>${confidence}%</strong>`;
+                } else {
+                    resultTitle.textContent = 'Error';
+                    resultTitle.className = 'text-danger';
+                    resultText.textContent = data.message || 'An error occurred during prediction.';
+                    confidenceText.textContent = '';
+                }
+                
+                resultCard.style.display = 'block';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            })
+            .finally(() => {
+                // Reset button state
+                button.disabled = false;
+                buttonText.textContent = 'Predict';
+                spinner.classList.add('d-none');
+            });
+        });
+        
+        // Handle new prediction button
+        document.getElementById('newPredictionBtn').addEventListener('click', function() {
+            document.getElementById('predictionForm').style.display = 'block';
+            document.querySelector('.result-card').style.display = 'none';
+            document.getElementById('predictionForm').reset();
+        });
+    </script>
+</body>
+</html>

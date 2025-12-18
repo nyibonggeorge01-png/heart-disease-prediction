@@ -1,0 +1,372 @@
+Let me check the contents of each Python file to provide you with detailed information about their functions.
+
+### 1. [heart_disease_code.py](cci:7://file:///c:/Users/MY%20PC/Desktop/FALL%20SEMESTER/M_L%20Cousre/Course/ML%20Project/edited_submitted/heart_disease_code.py:0:0-0:0)
+
+Let me check the other files to give you a complete overview.
+
+### 2. [heart_disease_project/run.py](cci:7://file:///c:/Users/MY%20PC/Desktop/FALL%20SEMESTER/M_L%20Cousre/Course/ML%20Project/edited_submitted/heart_disease_project/run.py:0:0-0:0)
+
+### 3. [heart_disease_project/save_model.py](cci:7://file:///c:/Users/MY%20PC/Desktop/FALL%20SEMESTER/M_L%20Cousre/Course/ML%20Project/edited_submitted/heart_disease_project/save_model.py:0:0-0:0)
+
+### 4. [heart_disease_project/app/__init__.py](cci:7://file:///c:/Users/MY%20PC/Desktop/FALL%20SEMESTER/M_L%20Cousre/Course/ML%20Project/edited_submitted/heart_disease_project/app/__init__.py:0:0-0:0)
+
+Here's a detailed breakdown of each code file and its functions:
+
+### 1. [heart_disease_code.py](cci:7://file:///c:/Users/MY%20PC/Desktop/FALL%20SEMESTER/M_L%20Cousre/Course/ML%20Project/edited_submitted/heart_disease_code.py:0:0-0:0)
+**Purpose**: Main script for heart disease prediction model training and evaluation.
+
+**Key Functions**:
+- **Data Loading**: Loads heart disease data from an Excel file
+- **Data Preprocessing**:
+  - Cleans and standardizes column names
+  - Handles missing values
+  - Converts data types
+  - Splits data into training and test sets
+- **Model Training**:
+  - Creates a scikit-learn pipeline with preprocessing and logistic regression
+  - Trains the model on the training data
+- **Model Evaluation**:
+  - Calculates accuracy, confusion matrix, and classification report
+  - Provides example predictions
+  - Shows feature importance
+
+### 2. [heart_disease_project/run.py](cci:7://file:///c:/Users/MY%20PC/Desktop/FALL%20SEMESTER/M_L%20Cousre/Course/ML%20Project/edited_submitted/heart_disease_project/run.py:0:0-0:0)
+**Purpose**: Main entry point for the Flask web application.
+
+**Key Functions**:
+- **Application Initialization**:
+  - Creates necessary directories (uploads, models)
+  - Starts the Flask development server
+  - Runs on `0.0.0.0:8000` with debug mode enabled
+
+### 3. [heart_disease_project/save_model.py](cci:7://file:///c:/Users/MY%20PC/Desktop/FALL%20SEMESTER/M_L%20Cousre/Course/ML%20Project/edited_submitted/heart_disease_project/save_model.py:0:0-0:0)
+**Purpose**: Script to train and save the heart disease prediction model.
+
+**Key Functions**:
+- **[load_and_prepare_data()](cci:1://file:///c:/Users/MY%20PC/Desktop/FALL%20SEMESTER/M_L%20Cousre/Course/ML%20Project/edited_submitted/heart_disease_project/save_model.py:11:0-43:13)**:
+  - Loads data from Excel
+  - Cleans and preprocesses the data
+  - Returns features (X) and target (y)
+- **[train_and_save_model()](cci:1://file:///c:/Users/MY%20PC/Desktop/FALL%20SEMESTER/M_L%20Cousre/Course/ML%20Project/edited_submitted/heart_disease_project/save_model.py:45:0-116:41)**:
+  - Sets up data preprocessing pipelines
+  - Trains a logistic regression model
+  - Saves the trained model to disk
+  - Handles error cases and provides feedback
+
+### 4. [heart_disease_project/app/__init__.py](cci:7://file:///c:/Users/MY%20PC/Desktop/FALL%20SEMESTER/M_L%20Cousre/Course/ML%20Project/edited_submitted/heart_disease_project/app/__init__.py:0:0-0:0)
+**Purpose**: Application factory for the Flask app.
+
+**Key Functions**:
+- **[create_app()](cci:1://file:///c:/Users/MY%20PC/Desktop/FALL%20SEMESTER/M_L%20Cousre/Course/ML%20Project/edited_submitted/heart_disease_project/app/__init__.py:4:0-19:14)**:
+  - Initializes Flask application
+  - Configures CORS
+  - Sets up upload folder
+  - Registers blueprints (routes)
+
+### 5. [heart_disease_project/app/routes.py](cci:7://file:///c:/Users/MY%20PC/Desktop/FALL%20SEMESTER/M_L%20Cousre/Course/ML%20Project/edited_submitted/heart_disease_project/app/routes.py:0:0-0:0)
+**Purpose**: Defines all the web application routes.
+
+**Key Functions**:
+- **`index()`**: Renders the main page
+- **`predict()`**: Handles prediction requests
+- **`upload_file()`**: Handles file uploads
+- **`view_results()`**: Displays prediction results
+
+### Data Files:
+1. [heart_disease_data.xlsx](cci:7://file:///c:/Users/MY%20PC/Desktop/FALL%20SEMESTER/M_L%20Cousre/Course/ML%20Project/edited_submitted/heart_disease_data.xlsx:0:0-0:0) - Main dataset containing patient records with features like age, cholesterol levels, etc.
+2. [results.txt](cci:7://file:///c:/Users/MY%20PC/Desktop/FALL%20SEMESTER/M_L%20Cousre/Course/ML%20Project/edited_submitted/results.txt:0:0-0:0) - Contains model training and evaluation results
+
+### Key Features:
+- **Data Preprocessing**: Handles missing values, categorical variables, and feature scaling
+- **Model Training**: Uses logistic regression with proper cross-validation
+- **Web Interface**: Provides a user-friendly way to make predictions
+- **Model Persistence**: Saves trained models for future use
+- **Error Handling**: Comprehensive error checking and user feedback
+
+### Dependencies:
+- Python 3.x
+- Flask (for web interface)
+- scikit-learn (for machine learning)
+- pandas (for data manipulation)
+- numpy (for numerical operations)
+- joblib (for model serialization)
+- openpyxl (for Excel file handling)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PS C:\Users\MY PC\Desktop\FALL SEMESTER\M_L Cousre\Course>  & 'c:\Users\MY PC\AppData\Local\Python\bin\python.exe' 'c:\Users\MY PC\.windsurf\extensions\ms-python.debugpy-2025.14.1-win32-x64\bundled\libs\debugpy\launcher' '59646' '--' 'c:\Users\MY PC\Desktop\FALL SEMESTER\M_L Cousre\Course\heart_disease_code.py' 
+Loaded dataset successfully!
+
+Dataset columns: ['AGE', 'SEX', 'CHOLESTEROL (mg/dl)', 'CIGARETTES PER DAY', 'FAMILY HISTORY OF HEART DISEASE', 'CHEST PAIN TYPE', 'BLOOD SUGER (mg/dl)', 'HEART DISEASE']
+
+First few rows of data:
+  AGE     SEX  CHOLESTEROL (mg/dl)  CIGARETTES PER DAY FAMILY HISTORY OF HEART DISEASE CHEST PAIN TYPE  BLOOD SUGER (mg/dl) HEART DISEASE
+0  30    MALE                282.0                 6.0                           False  typical angina                133.0          True
+1  44    MALE                173.0                 0.0                           False  typical angina                 89.0         False
+2  63  FEMALE                225.0                 0.0                            True    asymptomatic                111.0          True
+3  38  FEMALE                245.0                 0.0                           False    asymptomatic                 95.0         False
+4  47    MALE                292.0                 5.0                           False    asymptomatic                 86.0         False
+
+Missing values per column:
+AGE                                 3
+SEX                                 3
+CHOLESTEROL (mg/dl)                11
+CIGARETTES PER DAY                 11
+FAMILY HISTORY OF HEART DISEASE    11
+CHEST PAIN TYPE                    11
+BLOOD SUGER (mg/dl)                11
+HEART DISEASE                      11
+dtype: int64
+
+Raw column names: ['AGE', 'SEX', 'CHOLESTEROL (mg/dl)', 'CIGARETTES PER DAY', 'FAMILY HISTORY OF HEART DISEASE', 'CHEST PAIN TYPE', 'BLOOD SUGER (mg/dl)', 'HEART DISEASE']
+
+Cleaned column names: ['AGE', 'SEX', 'CHOLESTEROL_MG_DL', 'CIGARETTES_PER_DAY', 'FAMILY_HISTORY_OF_HEART_DISEASE', 'CHEST_PAIN_TYPE', 'BLOOD_SUGER_MG_DL', 'HEART_DISEASE']
+
+First few rows with cleaned column names:
+  AGE     SEX  CHOLESTEROL_MG_DL  CIGARETTES_PER_DAY FAMILY_HISTORY_OF_HEART_DISEASE CHEST_PAIN_TYPE  BLOOD_SUGER_MG_DL HEART_DISEASE
+0  30    MALE              282.0                 6.0                           False  typical angina              133.0          True
+1  44    MALE              173.0                 0.0                           False  typical angina               89.0         False
+2  63  FEMALE              225.0                 0.0                            True    asymptomatic              111.0          True
+3  38  FEMALE              245.0                 0.0                           False    asymptomatic               95.0         False
+4  47    MALE              292.0                 5.0                           False    asymptomatic               86.0         False
+
+Dropping rows with missing values...
+Dropped 11 rows with missing values.
+
+Unique values in target column: [True False]
+
+Features being used:
+Numeric features: ['AGE', 'CHOLESTEROL_MG_DL', 'CIGARETTES_PER_DAY', 'BLOOD_SUGER_MG_DL']
+Categorical features: ['SEX', 'FAMILY_HISTORY_OF_HEART_DISEASE', 'CHEST_PAIN_TYPE']
+
+First few rows of processed data:
+  AGE  CHOLESTEROL_MG_DL  CIGARETTES_PER_DAY  BLOOD_SUGER_MG_DL     SEX FAMILY_HISTORY_OF_HEART_DISEASE CHEST_PAIN_TYPE
+0  30              282.0                 6.0              133.0    MALE                           False  typical angina
+1  44              173.0                 0.0               89.0    MALE                           False  typical angina
+2  63              225.0                 0.0              111.0  FEMALE                            True    asymptomatic
+3  38              245.0                 0.0               95.0  FEMALE                           False    asymptomatic
+4  47              292.0                 5.0               86.0    MALE                           False    asymptomatic
+
+Data types:
+AGE                                 object
+CHOLESTEROL_MG_DL                  float64
+CIGARETTES_PER_DAY                 float64
+BLOOD_SUGER_MG_DL                  float64
+SEX                                 object
+FAMILY_HISTORY_OF_HEART_DISEASE     object
+CHEST_PAIN_TYPE                     object
+dtype: object
+
+Unique values in categorical columns:
+SEX: ['MALE', 'FEMALE']
+FAMILY_HISTORY_OF_HEART_DISEASE: [False, True]
+CHEST_PAIN_TYPE: ['typical angina', 'asymptomatic', 'non-anginal pain']
+
+Numeric columns statistics:
+       CHOLESTEROL_MG_DL  CIGARETTES_PER_DAY  BLOOD_SUGER_MG_DL
+count         999.000000          999.000000         999.000000
+mean          223.225225            2.234234         114.805806
+std            44.035743            3.266884          20.630938
+min           150.000000            0.000000          80.000000
+25%           182.000000            0.000000          97.000000
+50%           223.000000            0.000000         114.000000
+75%           261.000000            4.000000         133.000000
+max           300.000000           10.000000         150.000000
+
+Training model...
+
+Model Evaluation:
+--------------------------------------------------
+Accuracy: 0.815
+
+Confusion Matrix:
+[[65 17]
+ [20 98]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.76      0.79      0.78        82
+           1       0.85      0.83      0.84       118
+
+    accuracy                           0.81       200
+   macro avg       0.81      0.81      0.81       200
+weighted avg       0.82      0.81      0.82       200
+
+
+Example prediction for a new patient:
+
+=== Prediction Result ===
+Prediction: Heart Disease Detected
+Confidence: 99.91%
+
+Feature Importance (Top 5):
+                              Feature  Importance
+FAMILY_HISTORY_OF_HEART_DISEASE_False   -1.920941
+ FAMILY_HISTORY_OF_HEART_DISEASE_True    1.914535
+                    BLOOD_SUGER_MG_DL    1.855981
+                    CHOLESTEROL_MG_DL    1.781374
+                                  AGE    1.757450
+
+=== New Patient Data ===
+ AGE  SEX  CHOLESTEROL_MG_DL  CIGARETTES_PER_DAY  FAMILY_HISTORY_OF_HEART_DISEASE CHEST_PAIN_TYPE  BLOOD_SUGER_MG_DL
+  58 MALE              250.0                 4.0                             True  typical angina              130.0
+PS C:\Users\MY PC\Desktop\FALL SEMESTER\M_L Cousre\Course> python yourfile.py > result.txt
+>>
+C:\Users\MY PC\AppData\Local\Python\pythoncore-3.14-64\python.exe: can't open file 'C:\\Users\\MY PC\\Desktop\\FALL SEMESTER\\M_L Cousre\\Course\\yourfile.py': [Errno 2] No such file or directory
+PS C:\Users\MY PC\Desktop\FALL SEMESTER\M_L Cousre\Course> ^C
+PS C:\Users\MY PC\Desktop\FALL SEMESTER\M_L Cousre\Course>
+PS C:\Users\MY PC\Desktop\FALL SEMESTER\M_L Cousre\Course>  c:; cd 'c:\Users\MY PC\Desktop\FALL SEMESTER\M_L Cousre\Course'; & 'c:\Users\MY PC\AppData\Local\Python\bin\python.exe' 'c:\Users\MY PC\.windsurf\extensions\ms-python.debugpy-2025.14.1-win32-x64\bundled\libs\debugpy\launcher' '62902' '--' 'c:\Users\MY PC\Desktop\FALL SEMESTER\M_L Cousre\Course\heart_disease_code.py' 
+Loaded dataset successfully!
+
+Dataset columns: ['AGE', 'SEX', 'CHOLESTEROL (mg/dl)', 'CIGARETTES PER DAY', 'FAMILY HISTORY OF HEART DISEASE', 'CHEST PAIN TYPE', 'BLOOD SUGER (mg/dl)', 'HEART DISEASE']
+
+First few rows of data:
+  AGE     SEX  CHOLESTEROL (mg/dl)  CIGARETTES PER DAY FAMILY HISTORY OF HEART DISEASE CHEST PAIN TYPE  BLOOD SUGER (mg/dl) HEART DISEASE
+0  30    MALE                282.0                 6.0                           False  typical angina                133.0          True
+1  44    MALE                173.0                 0.0                           False  typical angina                 89.0         False
+2  63  FEMALE                225.0                 0.0                            True    asymptomatic                111.0          True
+3  38  FEMALE                245.0                 0.0                           False    asymptomatic                 95.0         False
+4  47    MALE                292.0                 5.0                           False    asymptomatic                 86.0         False
+
+Missing values per column:
+AGE                                 3
+SEX                                 3
+CHOLESTEROL (mg/dl)                11
+CIGARETTES PER DAY                 11
+FAMILY HISTORY OF HEART DISEASE    11
+CHEST PAIN TYPE                    11
+BLOOD SUGER (mg/dl)                11
+HEART DISEASE                      11
+dtype: int64
+
+Raw column names: ['AGE', 'SEX', 'CHOLESTEROL (mg/dl)', 'CIGARETTES PER DAY', 'FAMILY HISTORY OF HEART DISEASE', 'CHEST PAIN TYPE', 'BLOOD SUGER (mg/dl)', 'HEART DISEASE']
+
+Cleaned column names: ['AGE', 'SEX', 'CHOLESTEROL_MG_DL', 'CIGARETTES_PER_DAY', 'FAMILY_HISTORY_OF_HEART_DISEASE', 'CHEST_PAIN_TYPE', 'BLOOD_SUGER_MG_DL', 'HEART_DISEASE']
+
+First few rows with cleaned column names:
+  AGE     SEX  CHOLESTEROL_MG_DL  CIGARETTES_PER_DAY FAMILY_HISTORY_OF_HEART_DISEASE CHEST_PAIN_TYPE  BLOOD_SUGER_MG_DL HEART_DISEASE
+0  30    MALE              282.0                 6.0                           False  typical angina              133.0          True
+1  44    MALE              173.0                 0.0                           False  typical angina               89.0         False
+2  63  FEMALE              225.0                 0.0                            True    asymptomatic              111.0          True
+3  38  FEMALE              245.0                 0.0                           False    asymptomatic               95.0         False
+4  47    MALE              292.0                 5.0                           False    asymptomatic               86.0         False
+
+Dropping rows with missing values...
+Dropped 11 rows with missing values.
+
+Unique values in target column: [True False]
+
+Features being used:
+Numeric features: ['AGE', 'CHOLESTEROL_MG_DL', 'CIGARETTES_PER_DAY', 'BLOOD_SUGER_MG_DL']
+Categorical features: ['SEX', 'FAMILY_HISTORY_OF_HEART_DISEASE', 'CHEST_PAIN_TYPE']
+
+First few rows of processed data:
+  AGE  CHOLESTEROL_MG_DL  CIGARETTES_PER_DAY  BLOOD_SUGER_MG_DL     SEX FAMILY_HISTORY_OF_HEART_DISEASE CHEST_PAIN_TYPE
+0  30              282.0                 6.0              133.0    MALE                           False  typical angina
+1  44              173.0                 0.0               89.0    MALE                           False  typical angina
+2  63              225.0                 0.0              111.0  FEMALE                            True    asymptomatic
+3  38              245.0                 0.0               95.0  FEMALE                           False    asymptomatic
+4  47              292.0                 5.0               86.0    MALE                           False    asymptomatic
+
+Data types:
+AGE                                 object
+CHOLESTEROL_MG_DL                  float64
+CIGARETTES_PER_DAY                 float64
+BLOOD_SUGER_MG_DL                  float64
+SEX                                 object
+FAMILY_HISTORY_OF_HEART_DISEASE     object
+CHEST_PAIN_TYPE                     object
+dtype: object
+
+Unique values in categorical columns:
+SEX: ['MALE', 'FEMALE']
+FAMILY_HISTORY_OF_HEART_DISEASE: [False, True]
+CHEST_PAIN_TYPE: ['typical angina', 'asymptomatic', 'non-anginal pain']
+
+Numeric columns statistics:
+       CHOLESTEROL_MG_DL  CIGARETTES_PER_DAY  BLOOD_SUGER_MG_DL
+count         999.000000          999.000000         999.000000
+mean          223.225225            2.234234         114.805806
+std            44.035743            3.266884          20.630938
+min           150.000000            0.000000          80.000000
+25%           182.000000            0.000000          97.000000
+50%           223.000000            0.000000         114.000000
+75%           261.000000            4.000000         133.000000
+max           300.000000           10.000000         150.000000
+
+Training model...
+
+Model Evaluation:
+--------------------------------------------------
+Accuracy: 0.815
+
+Confusion Matrix:
+[[65 17]
+ [20 98]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.76      0.79      0.78        82
+           1       0.85      0.83      0.84       118
+
+    accuracy                           0.81       200
+   macro avg       0.81      0.81      0.81       200
+weighted avg       0.82      0.81      0.82       200
+
+
+Example prediction for a new patient:
+
+=== Prediction Result ===
+Prediction: Heart Disease Detected
+Confidence: 99.91%
+
+Feature Importance (Top 5):
+                              Feature  Importance
+FAMILY_HISTORY_OF_HEART_DISEASE_False   -1.920941
+ FAMILY_HISTORY_OF_HEART_DISEASE_True    1.914535
+                    BLOOD_SUGER_MG_DL    1.855981
+                    CHOLESTEROL_MG_DL    1.781374
+                                  AGE    1.757450
+
+=== New Patient Data ===
+ AGE  SEX  CHOLESTEROL_MG_DL  CIGARETTES_PER_DAY  FAMILY_HISTORY_OF_HEART_DISEASE CHEST_PAIN_TYPE  BLOOD_SUGER_MG_DL
+  58 MALE              250.0                 4.0                             True  typical angina              130.0
+PS C:\Users\MY PC\Desktop\FALL SEMESTER\M_L Cousre\Course> 
