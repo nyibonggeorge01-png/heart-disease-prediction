@@ -8,24 +8,32 @@ main = Blueprint('main', __name__)
 
 # Load the trained model
 def load_model():
-    # Get the directory where the current script is located
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    # Go up one level from the current directory (from app/ to project root)
-    project_root = os.path.dirname(current_dir)
-    # Construct the full path to the model
-    model_path = os.path.join(project_root, 'app', 'models', 'heart_disease_model.pkl')
-    
-    # Log the path for debugging
-    print(f"Looking for model at: {model_path}")
-    
-    if not os.path.exists(model_path):
-        # Try alternative path (relative to current file)
-        alt_path = os.path.join(current_dir, 'models', 'heart_disease_model.pkl')
-        print(f"Model not found at {model_path}. Trying alternative path: {alt_path}")
-        if os.path.exists(alt_path):
-            model_path = alt_path
-        else:
-            raise FileNotFoundError(f"Model not found at {model_path} or {alt_path}. Please train the model first.")
+    try:
+        # Try multiple possible model locations
+        possible_paths = [
+            # For local development
+            os.path.join(os.path.dirname(__file__), 'models', 'heart_disease_model.pkl'),
+            # For production on Render
+            os.path.join(os.getcwd(), 'app', 'models', 'heart_disease_model.pkl'),
+            # Alternative path
+            os.path.join(os.path.dirname(os.path.dirname(__file__)), 'app', 'models', 'heart_disease_model.pkl')
+        ]
+        
+        model = None
+        for model_path in possible_paths:
+            if os.path.exists(model_path):
+                model = joblib.load(model_path)
+                current_app.logger.info(f"Model loaded successfully from: {model_path}")
+                break
+                
+        if model is None:
+            raise FileNotFoundError("Could not find model file in any of the expected locations")
+            
+        return model
+        
+    except Exception as e:
+        current_app.logger.error(f"Error loading model: {str(e)}")
+        raise
     
     print(f"Loading model from: {model_path}")
     return joblib.load(model_path)
