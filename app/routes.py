@@ -16,28 +16,38 @@ def load_model():
             # For production on Render
             os.path.join(os.getcwd(), 'app', 'models', 'heart_disease_model.pkl'),
             # Alternative path
-            os.path.join(os.path.dirname(os.path.dirname(__file__)), 'app', 'models', 'heart_disease_model.pkl')
+            os.path.join(os.path.dirname(os.path.dirname(__file__)), 'app', 'models', 'heart_disease_model.pkl'),
+            # One more possible location
+            os.path.join(os.getcwd(), 'models', 'heart_disease_model.pkl')
         ]
         
         model = None
-        for model_path in possible_paths:
-            if os.path.exists(model_path):
-                model = joblib.load(model_path)
-                current_app.logger.info(f"Model loaded successfully from: {model_path}")
-                break
-                
+        model_path = None
+        last_error = None
+        
+        for path in possible_paths:
+            try:
+                if os.path.exists(path):
+                    current_app.logger.info(f"Attempting to load model from: {path}")
+                    model = joblib.load(path)
+                    model_path = path
+                    current_app.logger.info(f"Successfully loaded model from: {path}")
+                    break
+            except Exception as e:
+                last_error = str(e)
+                current_app.logger.warning(f"Failed to load model from {path}: {last_error}")
+                continue
+        
         if model is None:
-            raise FileNotFoundError("Could not find model file in any of the expected locations")
+            error_msg = f"Could not load model. Tried paths: {possible_paths}\nLast error: {last_error}"
+            current_app.logger.error(error_msg)
+            raise FileNotFoundError(error_msg)
             
         return model
         
     except Exception as e:
-        current_app.logger.error(f"Error loading model: {str(e)}")
+        current_app.logger.error(f"Critical error in load_model: {str(e)}", exc_info=True)
         raise
-    
-    print(f"Loading model from: {model_path}")
-    return joblib.load(model_path)
-
 @main.route('/')
 def home():
     return render_template('index.html')
