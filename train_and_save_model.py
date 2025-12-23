@@ -13,7 +13,7 @@ def train_model():
     
     # Load the dataset
     try:
-        df = pd.read_excel("heart_disease_data.xlsx")
+        df = pd.read_excel("data/heart_disease_data.xlsx")
         print("Dataset loaded successfully!")
     except Exception as e:
         print(f"Error loading dataset: {str(e)}")
