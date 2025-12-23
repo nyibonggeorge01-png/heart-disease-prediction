@@ -16,6 +16,7 @@ env/
 
 # Data files
 *.xlsx
+!app/models/heart_disease_model.pkl  # Keep this file
 *.pkl
 *.csv
 
