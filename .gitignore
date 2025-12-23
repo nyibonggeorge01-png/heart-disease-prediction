@@ -17,6 +17,8 @@ env/
 # Data files
 *.xlsx
 *.csv
+*.pkl
+!app/models/*.pkl
 
 # System files
 .DS_Store
