@@ -15,7 +15,7 @@ env/
 .idea/
 
 # Data files
-*.xlsx
+!data/*.xlsx
 *.csv
 *.pkl
 !app/models/*.pkl
