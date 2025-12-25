@@ -333,95 +333,103 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        document.getElementById('predictionForm').addEventListener('submit', function(e) {
+        document.getElementById('predictionForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Show loading state
             const button = document.getElementById('predictBtn');
             const buttonText = document.getElementById('buttonText');
             const spinner = document.getElementById('buttonSpinner');
+            const resultCard = document.querySelector('.result-card');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultText = document.getElementById('resultText');
+            const confidenceText = document.getElementById('confidenceText');
+            const resultIcon = document.getElementById('resultIcon');
+            const confidenceBar = document.getElementById('confidenceBar');
             
             button.disabled = true;
             buttonText.textContent = 'Predicting...';
             spinner.classList.remove('d-none');
             
-            // Get form data
-            const formData = {
-                age: document.getElementById('age').value,
-                sex: document.getElementById('sex').value,
-                cholesterol: document.getElementById('cholesterol').value,
-                cigarettes_per_day: document.getElementById('cigarettes_per_day').value,
-                family_history: document.getElementById('family_history').value,
-                chest_pain_type: document.getElementById('chest_pain_type').value,
-                blood_sugar: document.getElementById('blood_sugar').value
-            };
-            
-            // Send prediction request
-            fetch('/predict', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => response.json())
-            .then(data => {
+            try {
+                // Get form data
+                const formData = {
+                    age: document.getElementById('age').value,
+                    sex: document.getElementById('sex').value,
+                    cholesterol: document.getElementById('cholesterol').value,
+                    cigarettes_per_day: document.getElementById('cigarettes_per_day').value,
+                    family_history: document.getElementById('family_history').value,
+                    chest_pain_type: document.getElementById('chest_pain_type').value,
+                    blood_sugar: document.getElementById('blood_sugar').value
+                };
+
+                // Validate required fields
+                for (const [key, value] of Object.entries(formData)) {
+                    if (!value) {
+                        throw new Error(`Please fill in all required fields. Missing: ${key}`);
+                    }
+                }
+
+                // Send prediction request
+                const apiUrl = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost'
+                    ? 'http://127.0.0.1:5000/api/predict'
+                    : '/api/predict';
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+                
+                if (!response.ok || !data.success) {
+                    throw new Error(data.error || 'Failed to get prediction');
+                }
+
                 // Hide form and show result
                 document.getElementById('predictionForm').style.display = 'none';
-                const resultCard = document.querySelector('.result-card');
-                const resultTitle = document.getElementById('resultTitle');
-                const resultText = document.getElementById('resultText');
-                const confidenceText = document.getElementById('confidenceText');
-                const resultIcon = document.getElementById('resultIcon');
-                const confidenceBar = document.getElementById('confidenceBar');
                 
-                if (data.status === 'success') {
-                    const hasDisease = data.prediction === 1;
-                    const confidence = data.confidence ? Math.round(data.confidence * 10) / 10 : 'N/A';
-                    
-                    if (hasDisease) {
-                        resultTitle.textContent = 'Elevated Risk Detected';
-                        resultTitle.className = 'text-danger';
-                        resultIcon.className = 'result-icon text-danger';
-                        resultIcon.innerHTML = '<i class="fas fa-exclamation-triangle"></i>';
-                        resultText.innerHTML = 'Based on the information provided, our assessment indicates an <strong>elevated risk</strong> of heart disease. We recommend consulting with a healthcare professional for a comprehensive evaluation.';
-                        confidenceBar.className = 'progress-bar bg-danger';
-                    } else {
-                        resultTitle.textContent = 'Low Risk';
-                        resultTitle.className = 'text-success';
-                        resultIcon.className = 'result-icon text-success';
-                        resultIcon.innerHTML = '<i class="fas fa-check-circle"></i>';
-                        resultText.innerHTML = 'Based on the information provided, our assessment indicates a <strong>lower risk</strong> of heart disease. Continue maintaining a heart-healthy lifestyle with regular check-ups.';
-                        confidenceBar.className = 'progress-bar bg-success';
-                    }
-                    
-                    // Animate confidence meter
-                    confidenceBar.style.width = '0%';
-                    confidenceBar.setAttribute('aria-valuenow', confidence);
-                    setTimeout(() => {
-                        confidenceBar.style.width = `${confidence}%`;
-                    }, 100);
-                    
-                    confidenceText.innerHTML = `<i class="fas fa-chart-pie me-2"></i>Assessment Confidence: <strong>${confidence}%</strong>`;
-                } else {
-                    resultTitle.textContent = 'Error';
+                const hasDisease = data.prediction === 1;
+                const confidence = data.probability ? Math.round(data.probability * 100) : 0;
+                
+                if (hasDisease) {
+                    resultTitle.textContent = 'Elevated Risk Detected';
                     resultTitle.className = 'text-danger';
-                    resultText.textContent = data.message || 'An error occurred during prediction.';
-                    confidenceText.textContent = '';
+                    resultIcon.className = 'result-icon text-danger';
+                    resultIcon.innerHTML = '<i class="fas fa-exclamation-triangle"></i>';
+                    resultText.innerHTML = 'Based on the information provided, our assessment indicates an <strong>elevated risk</strong> of heart disease.';
+                    confidenceBar.className = 'progress-bar bg-danger';
+                } else {
+                    resultTitle.textContent = 'Low Risk';
+                    resultTitle.className = 'text-success';
+                    resultIcon.className = 'result-icon text-success';
+                    resultIcon.innerHTML = '<i class="fas fa-check-circle"></i>';
+                    resultText.innerHTML = 'Based on the information provided, our assessment indicates a <strong>lower risk</strong> of heart disease.';
+                    confidenceBar.className = 'progress-bar bg-success';
                 }
                 
+                // Animate confidence meter
+                confidenceBar.style.width = '0%';
+                confidenceBar.setAttribute('aria-valuenow', confidence);
+                setTimeout(() => {
+                    confidenceBar.style.width = `${confidence}%`;
+                }, 100);
+                
+                confidenceText.innerHTML = `<i class="fas fa-chart-pie me-2"></i>Assessment Confidence: <strong>${confidence}%</strong>`;
                 resultCard.style.display = 'block';
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                alert('An error occurred. Please try again.');
-            })
-            .finally(() => {
+
+            } catch (error) {
+                console.error('Prediction error:', error);
+                alert(`Error: ${error.message || 'Failed to get prediction. Please try again.'}`);
+            } finally {
                 // Reset button state
                 button.disabled = false;
-                buttonText.textContent = 'Predict';
+                buttonText.textContent = 'Analyze My Risk';
                 spinner.classList.add('d-none');
-            });
+            }
         });
         
         // Handle new prediction button

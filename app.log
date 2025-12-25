@@ -1,0 +1,597 @@
+2025-12-25 20:41:56,189 - werkzeug - WARNING -  * Debugger is active!
+2025-12-25 20:41:56,194 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-25 20:42:20,111 - werkzeug - INFO -  * Detected change in 'C:\\Users\\MY PC\\Documents\\ML_working\\heart-disease-prediction\\app.py', reloading
+2025-12-25 20:42:24,345 - werkzeug - WARNING -  * Debugger is active!
+2025-12-25 20:42:24,350 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-25 20:43:12,666 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:3000
+ * Running on http://192.168.1.165:3000
+2025-12-25 20:43:12,667 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-25 20:43:12,669 - werkzeug - INFO -  * Restarting with stat
+2025-12-25 20:43:14,618 - werkzeug - WARNING -  * Debugger is active!
+2025-12-25 20:43:14,622 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-25 20:43:30,763 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2025 20:43:30] "GET / HTTP/1.1" 200 -
+2025-12-25 20:43:55,220 - __main__ - INFO - 
+==================================================
+2025-12-25 20:43:55,221 - __main__ - INFO - New POST request to /api/predict
+2025-12-25 20:43:55,222 - __main__ - INFO - Headers: {'Host': '127.0.0.1:3000', 'Connection': 'keep-alive', 'Content-Length': '154', 'Sec-Ch-Ua-Platform': '"Windows"', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'Sec-Ch-Ua': '"Google Chrome";v="143", "Chromium";v="143", "Not A(Brand";v="24"', 'Content-Type': 'application/json', 'Sec-Ch-Ua-Mobile': '?0', 'Accept': '*/*', 'Origin': 'http://127.0.0.1:3000', 'Sec-Fetch-Site': 'same-origin', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Dest': 'empty', 'Referer': 'http://127.0.0.1:3000/', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'Accept-Language': 'en-US,en;q=0.9'}
+2025-12-25 20:43:55,223 - __main__ - INFO - Incoming data type: <class 'bytes'>
+2025-12-25 20:43:55,223 - __main__ - INFO - Raw data: b'{"age":"78","sex":"female","cholesterol":"111","cigarettes_per_day":"0","family_history":"false","chest_pain_type":"non-anginal pain","blood_sugar":"189"}'
+2025-12-25 20:43:55,224 - __main__ - INFO - Parsed JSON data: {'age': '78', 'sex': 'female', 'cholesterol': '111', 'cigarettes_per_day': '0', 'family_history': 'false', 'chest_pain_type': 'non-anginal pain', 'blood_sugar': '189'}
+2025-12-25 20:43:55,224 - app - INFO - Received prediction request: {'age': '78', 'sex': 'female', 'cholesterol': '111', 'cigarettes_per_day': '0', 'family_history': 'false', 'chest_pain_type': 'non-anginal pain', 'blood_sugar': '189'}
+2025-12-25 20:43:55,225 - __main__ - INFO - All required fields present
+2025-12-25 20:43:55,226 - __main__ - INFO - Starting prediction processing
+2025-12-25 20:43:55,226 - __main__ - INFO - Chest pain type: 'non-anginal pain' (original: 'non-anginal pain')
+2025-12-25 20:43:55,227 - __main__ - INFO - Processed input data: [[78.0, 0.0, 111.0, 0.0, 0.0, 2.0, 189.0]]
+2025-12-25 20:43:55,228 - app - INFO - Processed input data: [[78.0, 0.0, 111.0, 0.0, 0.0, 2.0, 189.0]]
+2025-12-25 20:43:55,228 - __main__ - INFO - Making prediction...
+2025-12-25 20:43:55,230 - __main__ - ERROR - Prediction error: Specifying the columns using strings is only supported for dataframes.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app.py", line 164, in predict
+    prediction = model.predict(input_data)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\pipeline.py", line 745, in predict
+    Xt = transform.transform(Xt)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\_set_output.py", line 316, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\compose\_column_transformer.py", line 1099, in transform
+    Xs = self._call_func_on_transformers(
+        X,
+    ...<3 lines>...
+        routed_params=routed_params,
+    )
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\compose\_column_transformer.py", line 893, in _call_func_on_transformers
+    X=_safe_indexing(X, columns, axis=1),
+      ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\_indexing.py", line 348, in _safe_indexing
+    raise ValueError(
+        "Specifying the columns using strings is only supported for dataframes."
+    )
+ValueError: Specifying the columns using strings is only supported for dataframes.
+2025-12-25 20:43:55,374 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2025 20:43:55] "[35m[1mPOST /api/predict HTTP/1.1[0m" 500 -
+2025-12-25 20:45:40,921 - werkzeug - INFO -  * Detected change in 'C:\\Users\\MY PC\\Documents\\ML_working\\heart-disease-prediction\\app.py', reloading
+2025-12-25 20:45:41,657 - werkzeug - INFO -  * Restarting with stat
+2025-12-25 20:45:44,792 - werkzeug - WARNING -  * Debugger is active!
+2025-12-25 20:45:44,795 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-25 20:48:51,894 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:3000
+ * Running on http://192.168.1.165:3000
+2025-12-25 20:48:51,895 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-25 20:48:51,897 - werkzeug - INFO -  * Restarting with stat
+2025-12-25 20:48:53,650 - werkzeug - WARNING -  * Debugger is active!
+2025-12-25 20:48:53,654 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-25 20:49:04,792 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2025 20:49:04] "GET / HTTP/1.1" 200 -
+2025-12-25 20:49:35,583 - __main__ - INFO - 
+==================================================
+2025-12-25 20:49:35,583 - __main__ - INFO - New POST request to /api/predict
+2025-12-25 20:49:35,583 - __main__ - INFO - Headers: {'Host': '127.0.0.1:3000', 'Connection': 'keep-alive', 'Content-Length': '151', 'Sec-Ch-Ua-Platform': '"Windows"', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'Sec-Ch-Ua': '"Google Chrome";v="143", "Chromium";v="143", "Not A(Brand";v="24"', 'Content-Type': 'application/json', 'Sec-Ch-Ua-Mobile': '?0', 'Accept': '*/*', 'Origin': 'http://127.0.0.1:3000', 'Sec-Fetch-Site': 'same-origin', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Dest': 'empty', 'Referer': 'http://127.0.0.1:3000/', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'Accept-Language': 'en-US,en;q=0.9'}
+2025-12-25 20:49:35,584 - __main__ - INFO - Incoming data type: <class 'bytes'>
+2025-12-25 20:49:35,584 - __main__ - INFO - Raw data: b'{"age":"60","sex":"female","cholesterol":"123","cigarettes_per_day":"4","family_history":"true","chest_pain_type":"atypical angina","blood_sugar":"67"}'
+2025-12-25 20:49:35,584 - __main__ - INFO - Parsed JSON data: {'age': '60', 'sex': 'female', 'cholesterol': '123', 'cigarettes_per_day': '4', 'family_history': 'true', 'chest_pain_type': 'atypical angina', 'blood_sugar': '67'}
+2025-12-25 20:49:35,584 - app - INFO - Received prediction request: {'age': '60', 'sex': 'female', 'cholesterol': '123', 'cigarettes_per_day': '4', 'family_history': 'true', 'chest_pain_type': 'atypical angina', 'blood_sugar': '67'}
+2025-12-25 20:49:35,585 - __main__ - INFO - All required fields present
+2025-12-25 20:49:35,585 - __main__ - INFO - Starting prediction processing
+2025-12-25 20:49:35,585 - __main__ - INFO - Chest pain type: 'atypical angina' (original: 'atypical angina')
+2025-12-25 20:49:35,603 - __main__ - INFO - Processed input data: {'age': 60.0, 'sex': 0, 'cholesterol': 123.0, 'cigarettes_per_day': 4.0, 'family_history': 1, 'chest_pain_type': 1, 'blood_sugar': 67.0}
+2025-12-25 20:49:35,603 - __main__ - INFO - Making prediction...
+2025-12-25 20:49:35,606 - __main__ - ERROR - Prediction error: columns are missing: {'AGE', 'CIGARETTES_PER_DAY', 'BLOOD_SUGAR_MG_DL', 'SEX', 'CHOLESTEROL_MG_DL', 'FAMILY_HISTORY_OF_HEART_DISEASE', 'CHEST_PAIN_TYPE'}
+Traceback (most recent call last):
+  File "C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app.py", line 163, in predict
+    prediction = model.predict(input_data)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\pipeline.py", line 745, in predict
+    Xt = transform.transform(Xt)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\_set_output.py", line 316, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\compose\_column_transformer.py", line 1088, in transform
+    raise ValueError(f"columns are missing: {diff}")
+ValueError: columns are missing: {'AGE', 'CIGARETTES_PER_DAY', 'BLOOD_SUGAR_MG_DL', 'SEX', 'CHOLESTEROL_MG_DL', 'FAMILY_HISTORY_OF_HEART_DISEASE', 'CHEST_PAIN_TYPE'}
+2025-12-25 20:49:35,610 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2025 20:49:35] "[35m[1mPOST /api/predict HTTP/1.1[0m" 500 -
+2025-12-25 20:57:13,175 - werkzeug - WARNING -  * Debugger is active!
+2025-12-25 20:57:13,179 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-25 20:57:20,745 - werkzeug - INFO -  * Detected change in 'C:\\Users\\MY PC\\Documents\\ML_working\\heart-disease-prediction\\app\\routes.py', reloading
+2025-12-25 20:57:21,960 - werkzeug - WARNING -  * Debugger is active!
+2025-12-25 20:57:21,964 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-25 20:57:26,339 - werkzeug - INFO -  * Detected change in 'C:\\Users\\MY PC\\Documents\\ML_working\\heart-disease-prediction\\app\\routes.py', reloading
+2025-12-25 20:57:27,544 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 20:57:29,180 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 20:57:29,181 - app.routes - INFO - Model loaded successfully
+2025-12-25 20:57:29,197 - werkzeug - WARNING -  * Debugger is active!
+2025-12-25 20:57:29,203 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-25 20:57:34,721 - werkzeug - INFO -  * Detected change in 'C:\\Users\\MY PC\\Documents\\ML_working\\heart-disease-prediction\\app\\routes.py', reloading
+2025-12-25 20:57:36,131 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 20:57:37,472 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 20:57:37,473 - app.routes - INFO - Model loaded successfully
+2025-12-25 20:57:37,491 - werkzeug - WARNING -  * Debugger is active!
+2025-12-25 20:57:37,495 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-25 20:57:42,074 - werkzeug - INFO -  * Detected change in 'C:\\Users\\MY PC\\Documents\\ML_working\\heart-disease-prediction\\app\\routes.py', reloading
+2025-12-25 20:57:43,817 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 20:57:45,032 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 20:57:45,032 - app.routes - INFO - Model loaded successfully
+2025-12-25 20:57:45,049 - werkzeug - WARNING -  * Debugger is active!
+2025-12-25 20:57:45,053 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-25 20:57:53,851 - werkzeug - INFO -  * Detected change in 'C:\\Users\\MY PC\\Documents\\ML_working\\heart-disease-prediction\\app\\routes.py', reloading
+2025-12-25 21:00:41,113 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:00:42,103 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:00:42,104 - app.routes - INFO - Model loaded successfully
+2025-12-25 21:00:42,131 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-25 21:00:42,131 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-25 21:00:42,132 - werkzeug - INFO -  * Restarting with stat
+2025-12-25 21:00:42,876 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:00:43,766 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:00:43,766 - app.routes - INFO - Model loaded successfully
+2025-12-25 21:00:43,785 - werkzeug - WARNING -  * Debugger is active!
+2025-12-25 21:00:43,789 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-25 21:00:47,571 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2025 21:00:47] "GET / HTTP/1.1" 200 -
+2025-12-25 21:01:16,454 - app.routes - INFO - 
+==================================================
+2025-12-25 21:01:16,455 - app.routes - INFO - New POST request to /api/predict
+2025-12-25 21:01:16,456 - app.routes - INFO - Headers: {'Host': '127.0.0.1:5000', 'Connection': 'keep-alive', 'Content-Length': '151', 'Sec-Ch-Ua-Platform': '"Windows"', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'Sec-Ch-Ua': '"Google Chrome";v="143", "Chromium";v="143", "Not A(Brand";v="24"', 'Content-Type': 'application/json', 'Sec-Ch-Ua-Mobile': '?0', 'Accept': '*/*', 'Origin': 'http://127.0.0.1:5000', 'Sec-Fetch-Site': 'same-origin', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Dest': 'empty', 'Referer': 'http://127.0.0.1:5000/', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'Accept-Language': 'en-US,en;q=0.9'}
+2025-12-25 21:01:16,456 - app.routes - INFO - Incoming data type: <class 'bytes'>
+2025-12-25 21:01:16,457 - app.routes - INFO - Raw data: b'{"age":"55","sex":"male","cholesterol":"123","cigarettes_per_day":"3","family_history":"false","chest_pain_type":"non-anginal pain","blood_sugar":"66"}'
+2025-12-25 21:01:16,458 - app.routes - INFO - Parsed JSON data: {'age': '55', 'sex': 'male', 'cholesterol': '123', 'cigarettes_per_day': '3', 'family_history': 'false', 'chest_pain_type': 'non-anginal pain', 'blood_sugar': '66'}
+2025-12-25 21:01:16,458 - app.routes - INFO - All required fields present
+2025-12-25 21:01:16,459 - app.routes - INFO - Starting prediction processing
+2025-12-25 21:01:16,459 - app.routes - INFO - Chest pain type: 'non-anginal pain' (original: 'non-anginal pain')
+2025-12-25 21:01:16,477 - app.routes - INFO - Processed input data: {'AGE': 55.0, 'SEX': 1, 'CHOLESTEROL_MG_DL': 123.0, 'CIGARETTES_PER_DAY': 3.0, 'FAMILY_HISTORY_OF_HEART_DISEASE': 0, 'CHEST_PAIN_TYPE': 2, 'BLOOD_SUGAR_MG_DL': 66.0}
+2025-12-25 21:01:16,477 - app.routes - INFO - Input data columns: ['AGE', 'SEX', 'CHOLESTEROL_MG_DL', 'CIGARETTES_PER_DAY', 'FAMILY_HISTORY_OF_HEART_DISEASE', 'CHEST_PAIN_TYPE', 'BLOOD_SUGAR_MG_DL']
+2025-12-25 21:01:16,478 - app.routes - INFO - Input data shape: (1, 7)
+2025-12-25 21:01:16,480 - app.routes - INFO - Input data dtypes: AGE                                float64
+SEX                                  int64
+CHOLESTEROL_MG_DL                  float64
+CIGARETTES_PER_DAY                 float64
+FAMILY_HISTORY_OF_HEART_DISEASE      int64
+CHEST_PAIN_TYPE                      int64
+BLOOD_SUGAR_MG_DL                  float64
+dtype: object
+2025-12-25 21:01:16,481 - app.routes - INFO - Making prediction...
+2025-12-25 21:01:16,500 - app.routes - ERROR - Prediction error: ufunc 'isnan' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''
+Traceback (most recent call last):
+  File "C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\routes.py", line 164, in predict
+    prediction = model.predict(input_data)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\pipeline.py", line 745, in predict
+    Xt = transform.transform(Xt)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\_set_output.py", line 316, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\compose\_column_transformer.py", line 1099, in transform
+    Xs = self._call_func_on_transformers(
+        X,
+    ...<3 lines>...
+        routed_params=routed_params,
+    )
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\compose\_column_transformer.py", line 901, in _call_func_on_transformers
+    return Parallel(n_jobs=self.n_jobs)(jobs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\parallel.py", line 91, in __call__
+    return super().__call__(iterable_with_config_and_warning_filters)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\joblib\parallel.py", line 1986, in __call__
+    return output if self.return_generator else list(output)
+                                                ~~~~^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\joblib\parallel.py", line 1914, in _get_sequential_output
+    res = func(*args, **kwargs)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\parallel.py", line 184, in __call__
+    return self.function(*args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\pipeline.py", line 1464, in _transform_one
+    res = transformer.transform(X, **params.transform)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\pipeline.py", line 1043, in transform
+    Xt = transform.transform(Xt, **routed_params[name].transform)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\_set_output.py", line 316, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\preprocessing\_encoders.py", line 1051, in transform
+    X_int, X_mask = self._transform(
+                    ~~~~~~~~~~~~~~~^
+        X,
+        ^^
+    ...<2 lines>...
+        warn_on_unknown=warn_on_unknown,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\preprocessing\_encoders.py", line 212, in _transform
+    diff, valid_mask = _check_unknown(Xi, self.categories_[i], return_mask=True)
+                       ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\_encode.py", line 307, in _check_unknown
+    if xp.any(xp.isnan(known_values)):
+              ~~~~~~~~^^^^^^^^^^^^^^
+TypeError: ufunc 'isnan' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''
+2025-12-25 21:01:16,603 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2025 21:01:16] "[35m[1mPOST /api/predict HTTP/1.1[0m" 500 -
+2025-12-25 21:02:21,012 - werkzeug - INFO -  * Detected change in 'C:\\Users\\MY PC\\Documents\\ML_working\\heart-disease-prediction\\app\\routes.py', reloading
+2025-12-25 21:02:21,641 - werkzeug - INFO -  * Restarting with stat
+2025-12-25 21:02:22,672 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:02:23,943 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:02:23,944 - app.routes - INFO - Model loaded successfully
+2025-12-25 21:02:23,959 - werkzeug - WARNING -  * Debugger is active!
+2025-12-25 21:02:23,962 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-25 21:02:39,257 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:02:40,222 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:02:40,222 - app.routes - INFO - Model loaded successfully
+2025-12-25 21:02:40,250 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-25 21:02:40,250 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-25 21:02:40,251 - werkzeug - INFO -  * Restarting with stat
+2025-12-25 21:02:41,135 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:02:42,173 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:02:42,174 - app.routes - INFO - Model loaded successfully
+2025-12-25 21:02:42,187 - werkzeug - WARNING -  * Debugger is active!
+2025-12-25 21:02:42,190 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-25 21:02:45,991 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2025 21:02:45] "GET / HTTP/1.1" 200 -
+2025-12-25 21:03:25,670 - app.routes - INFO - 
+==================================================
+2025-12-25 21:03:25,670 - app.routes - INFO - New POST request to /api/predict
+2025-12-25 21:03:25,670 - app.routes - INFO - Headers: {'Host': '127.0.0.1:5000', 'Connection': 'keep-alive', 'Content-Length': '153', 'Sec-Ch-Ua-Platform': '"Windows"', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'Sec-Ch-Ua': '"Google Chrome";v="143", "Chromium";v="143", "Not A(Brand";v="24"', 'Content-Type': 'application/json', 'Sec-Ch-Ua-Mobile': '?0', 'Accept': '*/*', 'Origin': 'http://127.0.0.1:5000', 'Sec-Fetch-Site': 'same-origin', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Dest': 'empty', 'Referer': 'http://127.0.0.1:5000/', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'Accept-Language': 'en-US,en;q=0.9'}
+2025-12-25 21:03:25,671 - app.routes - INFO - Incoming data type: <class 'bytes'>
+2025-12-25 21:03:25,671 - app.routes - INFO - Raw data: b'{"age":"66","sex":"female","cholesterol":"123","cigarettes_per_day":"4","family_history":"false","chest_pain_type":"non-anginal pain","blood_sugar":"55"}'
+2025-12-25 21:03:25,671 - app.routes - INFO - Parsed JSON data: {'age': '66', 'sex': 'female', 'cholesterol': '123', 'cigarettes_per_day': '4', 'family_history': 'false', 'chest_pain_type': 'non-anginal pain', 'blood_sugar': '55'}
+2025-12-25 21:03:25,672 - app.routes - INFO - All required fields present
+2025-12-25 21:03:25,672 - app.routes - INFO - Starting prediction processing
+2025-12-25 21:03:25,672 - app.routes - INFO - Chest pain type: 'non-anginal pain' (original: 'non-anginal pain')
+2025-12-25 21:03:25,687 - app.routes - INFO - Processed input data: {'AGE': 66.0, 'SEX': 0, 'CHOLESTEROL_MG_DL': 123.0, 'CIGARETTES_PER_DAY': 4.0, 'FAMILY_HISTORY_OF_HEART_DISEASE': 0, 'CHEST_PAIN_TYPE': 2, 'BLOOD_SUGAR_MG_DL': 55.0}
+2025-12-25 21:03:25,688 - app.routes - INFO - Input data columns: ['AGE', 'SEX', 'CHOLESTEROL_MG_DL', 'CIGARETTES_PER_DAY', 'FAMILY_HISTORY_OF_HEART_DISEASE', 'CHEST_PAIN_TYPE', 'BLOOD_SUGAR_MG_DL']
+2025-12-25 21:03:25,688 - app.routes - INFO - Input data shape: (1, 7)
+2025-12-25 21:03:25,690 - app.routes - INFO - Input data dtypes: AGE                                float64
+SEX                                  int64
+CHOLESTEROL_MG_DL                  float64
+CIGARETTES_PER_DAY                 float64
+FAMILY_HISTORY_OF_HEART_DISEASE      int64
+CHEST_PAIN_TYPE                      int64
+BLOOD_SUGAR_MG_DL                  float64
+dtype: object
+2025-12-25 21:03:25,691 - app.routes - INFO - Making prediction...
+2025-12-25 21:03:25,697 - app.routes - ERROR - Prediction error: ufunc 'isnan' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''
+Traceback (most recent call last):
+  File "C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\routes.py", line 165, in predict
+    prediction = model.predict(input_data)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\pipeline.py", line 745, in predict
+    Xt = transform.transform(Xt)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\_set_output.py", line 316, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\compose\_column_transformer.py", line 1099, in transform
+    Xs = self._call_func_on_transformers(
+        X,
+    ...<3 lines>...
+        routed_params=routed_params,
+    )
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\compose\_column_transformer.py", line 901, in _call_func_on_transformers
+    return Parallel(n_jobs=self.n_jobs)(jobs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\parallel.py", line 91, in __call__
+    return super().__call__(iterable_with_config_and_warning_filters)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\joblib\parallel.py", line 1986, in __call__
+    return output if self.return_generator else list(output)
+                                                ~~~~^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\joblib\parallel.py", line 1914, in _get_sequential_output
+    res = func(*args, **kwargs)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\parallel.py", line 184, in __call__
+    return self.function(*args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\pipeline.py", line 1464, in _transform_one
+    res = transformer.transform(X, **params.transform)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\pipeline.py", line 1043, in transform
+    Xt = transform.transform(Xt, **routed_params[name].transform)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\_set_output.py", line 316, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\preprocessing\_encoders.py", line 1051, in transform
+    X_int, X_mask = self._transform(
+                    ~~~~~~~~~~~~~~~^
+        X,
+        ^^
+    ...<2 lines>...
+        warn_on_unknown=warn_on_unknown,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\preprocessing\_encoders.py", line 212, in _transform
+    diff, valid_mask = _check_unknown(Xi, self.categories_[i], return_mask=True)
+                       ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\_encode.py", line 307, in _check_unknown
+    if xp.any(xp.isnan(known_values)):
+              ~~~~~~~~^^^^^^^^^^^^^^
+TypeError: ufunc 'isnan' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''
+2025-12-25 21:03:25,709 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2025 21:03:25] "[35m[1mPOST /api/predict HTTP/1.1[0m" 500 -
+2025-12-25 21:04:28,250 - werkzeug - INFO -  * Detected change in 'C:\\Users\\MY PC\\Documents\\ML_working\\heart-disease-prediction\\app\\routes.py', reloading
+2025-12-25 21:04:28,803 - werkzeug - INFO -  * Restarting with stat
+2025-12-25 21:04:30,518 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:04:31,892 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:04:31,892 - app.routes - INFO - Model loaded successfully
+2025-12-25 21:04:31,911 - werkzeug - WARNING -  * Debugger is active!
+2025-12-25 21:04:31,914 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-25 21:04:46,049 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:04:47,079 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:04:47,080 - app.routes - INFO - Model loaded successfully
+2025-12-25 21:04:47,114 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-25 21:04:47,115 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-25 21:04:47,116 - werkzeug - INFO -  * Restarting with stat
+2025-12-25 21:04:47,955 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:04:48,940 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:04:48,940 - app.routes - INFO - Model loaded successfully
+2025-12-25 21:04:48,958 - werkzeug - WARNING -  * Debugger is active!
+2025-12-25 21:04:48,961 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-25 21:04:56,026 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2025 21:04:56] "GET / HTTP/1.1" 200 -
+2025-12-25 21:05:02,245 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2025 21:05:02] "GET / HTTP/1.1" 200 -
+2025-12-25 21:05:26,344 - app.routes - INFO - 
+==================================================
+2025-12-25 21:05:26,345 - app.routes - INFO - New POST request to /api/predict
+2025-12-25 21:05:26,345 - app.routes - INFO - Headers: {'Host': '127.0.0.1:5000', 'Connection': 'keep-alive', 'Content-Length': '149', 'Sec-Ch-Ua-Platform': '"Windows"', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'Sec-Ch-Ua': '"Google Chrome";v="143", "Chromium";v="143", "Not A(Brand";v="24"', 'Content-Type': 'application/json', 'Sec-Ch-Ua-Mobile': '?0', 'Accept': '*/*', 'Origin': 'http://127.0.0.1:5000', 'Sec-Fetch-Site': 'same-origin', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Dest': 'empty', 'Referer': 'http://127.0.0.1:5000/', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'Accept-Language': 'en-US,en;q=0.9'}
+2025-12-25 21:05:26,345 - app.routes - INFO - Incoming data type: <class 'bytes'>
+2025-12-25 21:05:26,346 - app.routes - INFO - Raw data: b'{"age":"55","sex":"male","cholesterol":"123","cigarettes_per_day":"4","family_history":"true","chest_pain_type":"atypical angina","blood_sugar":"56"}'
+2025-12-25 21:05:26,346 - app.routes - INFO - Parsed JSON data: {'age': '55', 'sex': 'male', 'cholesterol': '123', 'cigarettes_per_day': '4', 'family_history': 'true', 'chest_pain_type': 'atypical angina', 'blood_sugar': '56'}
+2025-12-25 21:05:26,346 - app.routes - INFO - All required fields present
+2025-12-25 21:05:26,346 - app.routes - INFO - Starting prediction processing
+2025-12-25 21:05:26,347 - app.routes - INFO - Chest pain type: 'atypical angina' (original: 'atypical angina')
+2025-12-25 21:05:26,354 - app.routes - INFO - Processed input data: {'AGE': 55.0, 'SEX': 1, 'CHOLESTEROL_MG_DL': 123.0, 'CIGARETTES_PER_DAY': 4.0, 'FAMILY_HISTORY_OF_HEART_DISEASE': 1, 'CHEST_PAIN_TYPE': 1, 'BLOOD_SUGAR_MG_DL': 56.0}
+2025-12-25 21:05:26,354 - app.routes - INFO - Input data columns: ['AGE', 'SEX', 'CHOLESTEROL_MG_DL', 'CIGARETTES_PER_DAY', 'FAMILY_HISTORY_OF_HEART_DISEASE', 'CHEST_PAIN_TYPE', 'BLOOD_SUGAR_MG_DL']
+2025-12-25 21:05:26,357 - app.routes - INFO - Input data shape: (1, 7)
+2025-12-25 21:05:26,360 - app.routes - INFO - Input data dtypes: AGE                                float64
+SEX                                  int64
+CHOLESTEROL_MG_DL                  float64
+CIGARETTES_PER_DAY                 float64
+FAMILY_HISTORY_OF_HEART_DISEASE      int64
+CHEST_PAIN_TYPE                      int64
+BLOOD_SUGAR_MG_DL                  float64
+dtype: object
+2025-12-25 21:05:26,386 - app.routes - INFO - Prepared input data:
+    AGE  SEX  ...  CHEST_PAIN_TYPE  BLOOD_SUGAR_MG_DL
+0  55.0    1  ...                1               56.0
+
+[1 rows x 7 columns]
+2025-12-25 21:05:26,387 - app.routes - INFO - Input data types:
+AGE                                float64
+SEX                                  int64
+CHOLESTEROL_MG_DL                  float64
+CIGARETTES_PER_DAY                 float64
+FAMILY_HISTORY_OF_HEART_DISEASE      int64
+CHEST_PAIN_TYPE                      int64
+BLOOD_SUGAR_MG_DL                  float64
+dtype: object
+2025-12-25 21:05:26,388 - app.routes - INFO - Making prediction...
+2025-12-25 21:05:26,395 - app.routes - ERROR - Prediction failed: ufunc 'isnan' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''
+Traceback (most recent call last):
+  File "C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\routes.py", line 181, in predict
+    prediction = model.predict(input_data)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\pipeline.py", line 745, in predict
+    Xt = transform.transform(Xt)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\_set_output.py", line 316, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\compose\_column_transformer.py", line 1099, in transform
+    Xs = self._call_func_on_transformers(
+        X,
+    ...<3 lines>...
+        routed_params=routed_params,
+    )
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\compose\_column_transformer.py", line 901, in _call_func_on_transformers
+    return Parallel(n_jobs=self.n_jobs)(jobs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\parallel.py", line 91, in __call__
+    return super().__call__(iterable_with_config_and_warning_filters)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\joblib\parallel.py", line 1986, in __call__
+    return output if self.return_generator else list(output)
+                                                ~~~~^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\joblib\parallel.py", line 1914, in _get_sequential_output
+    res = func(*args, **kwargs)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\parallel.py", line 184, in __call__
+    return self.function(*args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\pipeline.py", line 1464, in _transform_one
+    res = transformer.transform(X, **params.transform)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\pipeline.py", line 1043, in transform
+    Xt = transform.transform(Xt, **routed_params[name].transform)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\_set_output.py", line 316, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\preprocessing\_encoders.py", line 1051, in transform
+    X_int, X_mask = self._transform(
+                    ~~~~~~~~~~~~~~~^
+        X,
+        ^^
+    ...<2 lines>...
+        warn_on_unknown=warn_on_unknown,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\preprocessing\_encoders.py", line 212, in _transform
+    diff, valid_mask = _check_unknown(Xi, self.categories_[i], return_mask=True)
+                       ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\_encode.py", line 307, in _check_unknown
+    if xp.any(xp.isnan(known_values)):
+              ~~~~~~~~^^^^^^^^^^^^^^
+TypeError: ufunc 'isnan' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''
+2025-12-25 21:05:26,402 - app.routes - INFO - Model steps: ['preprocessor', 'classifier']
+2025-12-25 21:05:26,402 - app.routes - ERROR - Prediction error: ufunc 'isnan' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''
+Traceback (most recent call last):
+  File "C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\routes.py", line 181, in predict
+    prediction = model.predict(input_data)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\pipeline.py", line 745, in predict
+    Xt = transform.transform(Xt)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\_set_output.py", line 316, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\compose\_column_transformer.py", line 1099, in transform
+    Xs = self._call_func_on_transformers(
+        X,
+    ...<3 lines>...
+        routed_params=routed_params,
+    )
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\compose\_column_transformer.py", line 901, in _call_func_on_transformers
+    return Parallel(n_jobs=self.n_jobs)(jobs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\parallel.py", line 91, in __call__
+    return super().__call__(iterable_with_config_and_warning_filters)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\joblib\parallel.py", line 1986, in __call__
+    return output if self.return_generator else list(output)
+                                                ~~~~^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\joblib\parallel.py", line 1914, in _get_sequential_output
+    res = func(*args, **kwargs)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\parallel.py", line 184, in __call__
+    return self.function(*args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\pipeline.py", line 1464, in _transform_one
+    res = transformer.transform(X, **params.transform)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\pipeline.py", line 1043, in transform
+    Xt = transform.transform(Xt, **routed_params[name].transform)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\_set_output.py", line 316, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\preprocessing\_encoders.py", line 1051, in transform
+    X_int, X_mask = self._transform(
+                    ~~~~~~~~~~~~~~~^
+        X,
+        ^^
+    ...<2 lines>...
+        warn_on_unknown=warn_on_unknown,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\preprocessing\_encoders.py", line 212, in _transform
+    diff, valid_mask = _check_unknown(Xi, self.categories_[i], return_mask=True)
+                       ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\utils\_encode.py", line 307, in _check_unknown
+    if xp.any(xp.isnan(known_values)):
+              ~~~~~~~~^^^^^^^^^^^^^^
+TypeError: ufunc 'isnan' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''
+2025-12-25 21:05:26,407 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2025 21:05:26] "[35m[1mPOST /api/predict HTTP/1.1[0m" 500 -
+2025-12-25 21:06:33,928 - werkzeug - INFO -  * Detected change in 'C:\\Users\\MY PC\\Documents\\ML_working\\heart-disease-prediction\\app\\routes.py', reloading
+2025-12-25 21:06:34,363 - werkzeug - INFO -  * Restarting with stat
+2025-12-25 21:06:35,411 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:06:36,846 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:06:36,847 - app.routes - INFO - Model loaded successfully
+2025-12-25 21:06:36,861 - werkzeug - WARNING -  * Debugger is active!
+2025-12-25 21:06:36,866 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-25 21:06:57,672 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:06:58,646 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:06:58,646 - app.routes - INFO - Model loaded successfully
+2025-12-25 21:06:58,676 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-25 21:06:58,676 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-25 21:06:58,679 - werkzeug - INFO -  * Restarting with stat
+2025-12-25 21:06:59,503 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:07:00,555 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:07:00,555 - app.routes - INFO - Model loaded successfully
+2025-12-25 21:07:00,572 - werkzeug - WARNING -  * Debugger is active!
+2025-12-25 21:07:00,578 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-25 21:07:04,220 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2025 21:07:04] "GET / HTTP/1.1" 200 -
+2025-12-25 21:07:32,719 - app.routes - INFO - 
+==================================================
+2025-12-25 21:07:32,720 - app.routes - INFO - New POST request to /api/predict
+2025-12-25 21:07:32,720 - app.routes - INFO - Headers: {'Host': '127.0.0.1:5000', 'Connection': 'keep-alive', 'Content-Length': '150', 'Sec-Ch-Ua-Platform': '"Windows"', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'Sec-Ch-Ua': '"Google Chrome";v="143", "Chromium";v="143", "Not A(Brand";v="24"', 'Content-Type': 'application/json', 'Sec-Ch-Ua-Mobile': '?0', 'Accept': '*/*', 'Origin': 'http://127.0.0.1:5000', 'Sec-Fetch-Site': 'same-origin', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Dest': 'empty', 'Referer': 'http://127.0.0.1:5000/', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'Accept-Language': 'en-US,en;q=0.9'}
+2025-12-25 21:07:32,721 - app.routes - INFO - Incoming data type: <class 'bytes'>
+2025-12-25 21:07:32,721 - app.routes - INFO - Raw data: b'{"age":"55","sex":"female","cholesterol":"111","cigarettes_per_day":"1","family_history":"true","chest_pain_type":"typical angina","blood_sugar":"56"}'
+2025-12-25 21:07:32,722 - app.routes - INFO - Parsed JSON data: {'age': '55', 'sex': 'female', 'cholesterol': '111', 'cigarettes_per_day': '1', 'family_history': 'true', 'chest_pain_type': 'typical angina', 'blood_sugar': '56'}
+2025-12-25 21:07:32,722 - app.routes - INFO - All required fields present
+2025-12-25 21:07:32,723 - app.routes - INFO - Starting prediction processing
+2025-12-25 21:07:32,723 - app.routes - INFO - Chest pain type: 'typical angina' (original: 'typical angina')
+2025-12-25 21:07:32,748 - app.routes - INFO - Input data before preprocessing:
+    AGE  ...  CHEST_PAIN_TYPE
+0  55.0  ...   typical angina
+
+[1 rows x 7 columns]
+2025-12-25 21:07:32,750 - app.routes - INFO - Data types before preprocessing:
+AGE                                float64
+CHOLESTEROL_MG_DL                  float64
+CIGARETTES_PER_DAY                 float64
+BLOOD_SUGAR_MG_DL                  float64
+SEX                                 object
+FAMILY_HISTORY_OF_HEART_DISEASE     object
+CHEST_PAIN_TYPE                     object
+dtype: object
+2025-12-25 21:07:32,752 - app.routes - INFO - Processed input data: {'AGE': 55.0, 'CHOLESTEROL_MG_DL': 111.0, 'CIGARETTES_PER_DAY': 1.0, 'BLOOD_SUGAR_MG_DL': 56.0, 'SEX': 'FEMALE', 'FAMILY_HISTORY_OF_HEART_DISEASE': 'True', 'CHEST_PAIN_TYPE': 'typical angina'}
+2025-12-25 21:07:32,752 - app.routes - INFO - Input data columns: ['AGE', 'CHOLESTEROL_MG_DL', 'CIGARETTES_PER_DAY', 'BLOOD_SUGAR_MG_DL', 'SEX', 'FAMILY_HISTORY_OF_HEART_DISEASE', 'CHEST_PAIN_TYPE']
+2025-12-25 21:07:32,753 - app.routes - INFO - Input data shape: (1, 7)
+2025-12-25 21:07:32,754 - app.routes - INFO - Input data dtypes: AGE                                float64
+CHOLESTEROL_MG_DL                  float64
+CIGARETTES_PER_DAY                 float64
+BLOOD_SUGAR_MG_DL                  float64
+SEX                                 object
+FAMILY_HISTORY_OF_HEART_DISEASE     object
+CHEST_PAIN_TYPE                     object
+dtype: object
+2025-12-25 21:07:32,761 - app.routes - INFO - Input data before prediction:
+    AGE  ...  CHEST_PAIN_TYPE
+0  55.0  ...   typical angina
+
+[1 rows x 7 columns]
+2025-12-25 21:07:32,761 - app.routes - INFO - Making prediction...
+2025-12-25 21:07:32,808 - app.routes - INFO - Prediction successful. Class: 0, Probability: 0.1200
+2025-12-25 21:07:32,835 - app.routes - INFO - Feature importances:
+2025-12-25 21:07:32,835 - app.routes - INFO -   num__AGE: 0.2398
+2025-12-25 21:07:32,835 - app.routes - INFO -   num__CHOLESTEROL_MG_DL: 0.2260
+2025-12-25 21:07:32,836 - app.routes - INFO -   num__CIGARETTES_PER_DAY: 0.1176
+2025-12-25 21:07:32,836 - app.routes - INFO -   num__BLOOD_SUGAR_MG_DL: 0.2423
+2025-12-25 21:07:32,836 - app.routes - INFO -   cat__SEX_FEMALE: 0.0063
+2025-12-25 21:07:32,836 - app.routes - INFO -   cat__SEX_MALE: 0.0053
+2025-12-25 21:07:32,837 - app.routes - INFO -   cat__FAMILY_HISTORY_OF_HEART_DISEASE_False: 0.0675
+2025-12-25 21:07:32,837 - app.routes - INFO -   cat__FAMILY_HISTORY_OF_HEART_DISEASE_True: 0.0761
+2025-12-25 21:07:32,837 - app.routes - INFO -   cat__CHEST_PAIN_TYPE_asymptomatic: 0.0052
+2025-12-25 21:07:32,837 - app.routes - INFO -   cat__CHEST_PAIN_TYPE_non-anginal pain: 0.0078
+2025-12-25 21:07:32,838 - app.routes - INFO -   cat__CHEST_PAIN_TYPE_typical angina: 0.0061
+2025-12-25 21:07:32,838 - app.routes - INFO - Prediction result - Class: 0, Probability: 0.12
+2025-12-25 21:07:32,838 - app.routes - INFO - Sending response: {'success': True, 'prediction': 0, 'probability': 0.12, 'risk_level': 'Low', 'message': 'Low risk of heart disease', 'timestamp': '2025-12-25T21:07:32.838717'}
+2025-12-25 21:07:32,839 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2025 21:07:32] "POST /api/predict HTTP/1.1" 200 -
+2025-12-25 21:11:27,654 - werkzeug - INFO -  * Detected change in 'C:\\Users\\MY PC\\Documents\\ML_working\\heart-disease-prediction\\app.py', reloading
+2025-12-25 21:11:28,292 - werkzeug - INFO -  * Restarting with stat
+2025-12-25 21:11:30,089 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:11:31,508 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 21:11:31,508 - app.routes - INFO - Model loaded successfully
+2025-12-25 21:11:31,523 - werkzeug - WARNING -  * Debugger is active!
+2025-12-25 21:11:31,526 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-25 21:12:40,351 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2025 21:12:40] "GET / HTTP/1.1" 200 -
+2025-12-25 21:13:05,123 - app.routes - INFO - 
+==================================================
+2025-12-25 21:13:05,124 - app.routes - INFO - New POST request to /api/predict
+2025-12-25 21:13:05,124 - app.routes - INFO - Headers: {'Host': '127.0.0.1:5000', 'Connection': 'keep-alive', 'Content-Length': '151', 'Sec-Ch-Ua-Platform': '"Windows"', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'Sec-Ch-Ua': '"Google Chrome";v="143", "Chromium";v="143", "Not A(Brand";v="24"', 'Content-Type': 'application/json', 'Sec-Ch-Ua-Mobile': '?0', 'Accept': '*/*', 'Origin': 'http://127.0.0.1:5000', 'Sec-Fetch-Site': 'same-origin', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Dest': 'empty', 'Referer': 'http://127.0.0.1:5000/', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'Accept-Language': 'en-US,en;q=0.9'}
+2025-12-25 21:13:05,125 - app.routes - INFO - Incoming data type: <class 'bytes'>
+2025-12-25 21:13:05,125 - app.routes - INFO - Raw data: b'{"age":"78","sex":"female","cholesterol":"111","cigarettes_per_day":"1","family_history":"true","chest_pain_type":"atypical angina","blood_sugar":"66"}'
+2025-12-25 21:13:05,125 - app.routes - INFO - Parsed JSON data: {'age': '78', 'sex': 'female', 'cholesterol': '111', 'cigarettes_per_day': '1', 'family_history': 'true', 'chest_pain_type': 'atypical angina', 'blood_sugar': '66'}
+2025-12-25 21:13:05,126 - app.routes - INFO - All required fields present
+2025-12-25 21:13:05,126 - app.routes - INFO - Starting prediction processing
+2025-12-25 21:13:05,126 - app.routes - INFO - Chest pain type: 'atypical angina' (original: 'atypical angina')
+2025-12-25 21:13:05,146 - app.routes - INFO - Input data before preprocessing:
+    AGE  ...  CHEST_PAIN_TYPE
+0  78.0  ...  atypical angina
+
+[1 rows x 7 columns]
+2025-12-25 21:13:05,147 - app.routes - INFO - Data types before preprocessing:
+AGE                                float64
+CHOLESTEROL_MG_DL                  float64
+CIGARETTES_PER_DAY                 float64
+BLOOD_SUGAR_MG_DL                  float64
+SEX                                 object
+FAMILY_HISTORY_OF_HEART_DISEASE     object
+CHEST_PAIN_TYPE                     object
+dtype: object
+2025-12-25 21:13:05,150 - app.routes - INFO - Processed input data: {'AGE': 78.0, 'CHOLESTEROL_MG_DL': 111.0, 'CIGARETTES_PER_DAY': 1.0, 'BLOOD_SUGAR_MG_DL': 66.0, 'SEX': 'FEMALE', 'FAMILY_HISTORY_OF_HEART_DISEASE': 'True', 'CHEST_PAIN_TYPE': 'atypical angina'}
+2025-12-25 21:13:05,150 - app.routes - INFO - Input data columns: ['AGE', 'CHOLESTEROL_MG_DL', 'CIGARETTES_PER_DAY', 'BLOOD_SUGAR_MG_DL', 'SEX', 'FAMILY_HISTORY_OF_HEART_DISEASE', 'CHEST_PAIN_TYPE']
+2025-12-25 21:13:05,150 - app.routes - INFO - Input data shape: (1, 7)
+2025-12-25 21:13:05,152 - app.routes - INFO - Input data dtypes: AGE                                float64
+CHOLESTEROL_MG_DL                  float64
+CIGARETTES_PER_DAY                 float64
+BLOOD_SUGAR_MG_DL                  float64
+SEX                                 object
+FAMILY_HISTORY_OF_HEART_DISEASE     object
+CHEST_PAIN_TYPE                     object
+dtype: object
+2025-12-25 21:13:05,160 - app.routes - INFO - Input data before prediction:
+    AGE  ...  CHEST_PAIN_TYPE
+0  78.0  ...  atypical angina
+
+[1 rows x 7 columns]
+2025-12-25 21:13:05,160 - app.routes - INFO - Making prediction...
+2025-12-25 21:13:05,189 - app.routes - INFO - Prediction successful. Class: 1, Probability: 0.5500
+2025-12-25 21:13:05,211 - app.routes - INFO - Feature importances:
+2025-12-25 21:13:05,211 - app.routes - INFO -   num__AGE: 0.2398
+2025-12-25 21:13:05,212 - app.routes - INFO -   num__CHOLESTEROL_MG_DL: 0.2260
+2025-12-25 21:13:05,212 - app.routes - INFO -   num__CIGARETTES_PER_DAY: 0.1176
+2025-12-25 21:13:05,212 - app.routes - INFO -   num__BLOOD_SUGAR_MG_DL: 0.2423
+2025-12-25 21:13:05,212 - app.routes - INFO -   cat__SEX_FEMALE: 0.0063
+2025-12-25 21:13:05,212 - app.routes - INFO -   cat__SEX_MALE: 0.0053
+2025-12-25 21:13:05,213 - app.routes - INFO -   cat__FAMILY_HISTORY_OF_HEART_DISEASE_False: 0.0675
+2025-12-25 21:13:05,213 - app.routes - INFO -   cat__FAMILY_HISTORY_OF_HEART_DISEASE_True: 0.0761
+2025-12-25 21:13:05,213 - app.routes - INFO -   cat__CHEST_PAIN_TYPE_asymptomatic: 0.0052
+2025-12-25 21:13:05,213 - app.routes - INFO -   cat__CHEST_PAIN_TYPE_non-anginal pain: 0.0078
+2025-12-25 21:13:05,213 - app.routes - INFO -   cat__CHEST_PAIN_TYPE_typical angina: 0.0061
+2025-12-25 21:13:05,214 - app.routes - INFO - Prediction result - Class: 1, Probability: 0.55
+2025-12-25 21:13:05,214 - app.routes - INFO - Sending response: {'success': True, 'prediction': 1, 'probability': 0.55, 'risk_level': 'High', 'message': 'High risk of heart disease detected', 'timestamp': '2025-12-25T21:13:05.214197'}
+2025-12-25 21:13:05,214 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2025 21:13:05] "POST /api/predict HTTP/1.1" 200 -
