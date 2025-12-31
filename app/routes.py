@@ -48,13 +48,18 @@ def load_model():
     except Exception as e:
         logger.error(f"Error loading model: {str(e)}", exc_info=True)
         raise
+# Global variable to track if model is loaded
+model_loaded = False
+model = None
+
 # Load the model when the module is imported
 try:
     model = load_model()
+    model_loaded = True
     logger.info("Model loaded successfully")
 except Exception as e:
-    logger.error(f"Failed to load model: {str(e)}")
-    model = None
+    logger.error(f"Error loading model: {str(e)}")
+    model_loaded = False
 
 @main.route('/')
 def home():
@@ -79,7 +84,7 @@ def predict():
         logger.info(f"Incoming data type: {type(request.get_data())}")
         logger.info(f"Raw data: {request.get_data()}")
         
-        if not model:
+        if not model_loaded or model is None:
             error_msg = 'Prediction model not loaded. Please contact support.'
             logger.error(error_msg)
             response = jsonify({
@@ -256,6 +261,7 @@ def predict():
 def health_check():
     return jsonify({
         'status': 'healthy',
-        'model_loaded': model is not None,
+        'model_loaded': model_loaded,
+        'model_type': str(type(model)) if model is not None else 'None',
         'timestamp': datetime.now().isoformat()
     })
