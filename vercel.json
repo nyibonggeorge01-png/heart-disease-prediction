@@ -13,11 +13,5 @@
   "routes": [
     { "src": "/api/(.*)", "dest": "/api" },
     { "src": "/(.*)", "dest": "/app.py" }
-  ],
-  "build": {
-    "env": {
-      "PYTHON_VERSION": "3.9",
-      "PIP_USE_PEP517": "false"
-    }
-  }
+  ]
 }
