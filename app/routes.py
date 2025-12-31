@@ -20,46 +20,70 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 def load_model():
-    """Load the trained model with enhanced error handling and validation."""
+    """Load the trained model with enhanced error handling and version compatibility."""
     try:
+        # Define possible model paths
         possible_paths = [
+            os.path.join('app', 'models', 'heart_disease_model.pkl'),
             os.path.join(os.path.dirname(__file__), 'models', 'heart_disease_model.pkl'),
-            os.path.join(os.getcwd(), 'app', 'models', 'heart_disease_model.pkl'),
-            os.path.join(os.path.dirname(os.path.dirname(__file__)), 'app', 'models', 'heart_disease_model.pkl'),
-            os.path.join(os.getcwd(), 'models', 'heart_disease_model.pkl')
+            os.path.join(os.path.dirname(os.path.dirname(__file__)), 'models', 'heart_disease_model.pkl'),
+            os.path.join(os.getcwd(), 'models', 'heart_disease_model.pkl'),
+            'heart_disease_model.pkl'
         ]
         
         for path in possible_paths:
             try:
                 if os.path.exists(path):
-                    logger.info(f"Attempting to load model from: {path}")
+                    logger.info(f"🔍 Attempting to load model from: {path}")
                     file_size = os.path.getsize(path)
-                    logger.info(f"Model file size: {file_size} bytes")
+                    logger.info(f"📦 Model file size: {file_size} bytes")
                     
-                    # Try to load the model
-                    model = joblib.load(path)
-                    
-                    # Verify the loaded object is a valid model
-                    if not hasattr(model, 'predict'):
-                        raise ValueError(f"Loaded object from {path} is not a valid scikit-learn model (missing predict method)")
-                    
-                    # Check if it's a pipeline and has the expected steps
-                    if hasattr(model, 'named_steps'):
-                        logger.info(f"Model is a pipeline with steps: {list(model.named_steps.keys())}")
-                    
-                    logger.info(f"Successfully loaded model from: {path}")
-                    logger.info(f"Model type: {type(model).__name__}")
-                    return model
+                    # Try to load the model with specific joblib version
+                    try:
+                        import joblib
+                        model = joblib.load(path)
+                        logger.info(f"✅ Successfully loaded object from {path}")
+                        logger.info(f"📊 Object type: {type(model).__name__}")
+                        
+                        # Check if it's a valid model
+                        if not hasattr(model, 'predict'):
+                            logger.warning("⚠️ Loaded object is not a valid scikit-learn model (missing predict method)")
+                            
+                            # If it's a dictionary, try to find the model in it
+                            if isinstance(model, dict):
+                                logger.info("🔍 Found dictionary, searching for model...")
+                                for key, value in model.items():
+                                    if hasattr(value, 'predict'):
+                                        logger.info(f"✅ Found model in dictionary with key: {key}")
+                                        model = value
+                                        break
+                            
+                            if not hasattr(model, 'predict'):
+                                raise ValueError(f"Object from {path} is not a valid model")
+                        
+                        # Log model details
+                        if hasattr(model, 'named_steps'):
+                            logger.info(f"⚙️ Model is a pipeline with steps: {list(model.named_steps.keys())}")
+                        
+                        logger.info(f"🚀 Successfully loaded model from: {path}")
+                        logger.info(f"🔧 Model has predict method: {hasattr(model, 'predict')}")
+                        return model
+                        
+                    except Exception as load_error:
+                        logger.error(f"❌ Error loading model from {path}: {str(load_error)}", exc_info=True)
+                        continue
+                        
             except Exception as e:
-                logger.warning(f"Failed to load model from {path}: {str(e)}")
+                logger.error(f"❌ Error processing path {path}: {str(e)}")
                 continue
         
+        # If we get here, no model was successfully loaded
         error_msg = f"Could not load model from any of the paths: {possible_paths}"
         logger.error(error_msg)
         raise FileNotFoundError(error_msg)
         
     except Exception as e:
-        logger.error(f"Error loading model: {str(e)}", exc_info=True)
+        logger.error(f"❌ Critical error in load_model: {str(e)}", exc_info=True)
         raise
 
 # Global variable to track if model is loaded
