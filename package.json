@@ -3,8 +3,6 @@
   "version": "1.0.0",
   "description": "Heart Disease Prediction App",
   "scripts": {
-    "vercel-build": "pip install -r requirements.txt --no-cache-dir --frozen"
-  },
-  "dependencies": {},
-  "devDependencies": {}
+    "vercel-build": "pip install -r requirements.txt --no-cache-dir"
+  }
 }
