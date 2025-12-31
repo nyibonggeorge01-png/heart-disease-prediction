@@ -595,3 +595,214 @@ dtype: object
 2025-12-25 21:13:05,214 - app.routes - INFO - Prediction result - Class: 1, Probability: 0.55
 2025-12-25 21:13:05,214 - app.routes - INFO - Sending response: {'success': True, 'prediction': 1, 'probability': 0.55, 'risk_level': 'High', 'message': 'High risk of heart disease detected', 'timestamp': '2025-12-25T21:13:05.214197'}
 2025-12-25 21:13:05,214 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2025 21:13:05] "POST /api/predict HTTP/1.1" 200 -
+2025-12-25 22:02:20,534 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 22:02:22,608 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 22:02:22,608 - app.routes - INFO - Model loaded successfully
+2025-12-25 22:02:22,649 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-25 22:02:22,649 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-25 22:02:22,653 - werkzeug - INFO -  * Restarting with stat
+2025-12-25 22:02:23,466 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 22:02:24,459 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-25 22:02:24,460 - app.routes - INFO - Model loaded successfully
+2025-12-25 22:02:24,471 - werkzeug - WARNING -  * Debugger is active!
+2025-12-25 22:02:24,479 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-25 22:02:27,633 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2025 22:02:27] "GET / HTTP/1.1" 200 -
+2025-12-25 22:02:46,980 - app.routes - INFO - 
+==================================================
+2025-12-25 22:02:46,980 - app.routes - INFO - New POST request to /api/predict
+2025-12-25 22:02:46,980 - app.routes - INFO - Headers: {'Host': '127.0.0.1:5000', 'Connection': 'keep-alive', 'Content-Length': '152', 'Sec-Ch-Ua-Platform': '"Windows"', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'Sec-Ch-Ua': '"Google Chrome";v="143", "Chromium";v="143", "Not A(Brand";v="24"', 'Content-Type': 'application/json', 'Sec-Ch-Ua-Mobile': '?0', 'Accept': '*/*', 'Origin': 'http://127.0.0.1:5000', 'Sec-Fetch-Site': 'same-origin', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Dest': 'empty', 'Referer': 'http://127.0.0.1:5000/', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'Accept-Language': 'en-US,en;q=0.9'}
+2025-12-25 22:02:46,981 - app.routes - INFO - Incoming data type: <class 'bytes'>
+2025-12-25 22:02:46,981 - app.routes - INFO - Raw data: b'{"age":"78","sex":"female","cholesterol":"111","cigarettes_per_day":"1","family_history":"true","chest_pain_type":"non-anginal pain","blood_sugar":"55"}'
+2025-12-25 22:02:46,981 - app.routes - INFO - Parsed JSON data: {'age': '78', 'sex': 'female', 'cholesterol': '111', 'cigarettes_per_day': '1', 'family_history': 'true', 'chest_pain_type': 'non-anginal pain', 'blood_sugar': '55'}
+2025-12-25 22:02:46,981 - app.routes - INFO - All required fields present
+2025-12-25 22:02:46,981 - app.routes - INFO - Starting prediction processing
+2025-12-25 22:02:46,982 - app.routes - INFO - Chest pain type: 'non-anginal pain' (original: 'non-anginal pain')
+2025-12-25 22:02:47,024 - app.routes - INFO - Input data before preprocessing:
+    AGE  ...   CHEST_PAIN_TYPE
+0  78.0  ...  non-anginal pain
+
+[1 rows x 7 columns]
+2025-12-25 22:02:47,026 - app.routes - INFO - Data types before preprocessing:
+AGE                                float64
+CHOLESTEROL_MG_DL                  float64
+CIGARETTES_PER_DAY                 float64
+BLOOD_SUGAR_MG_DL                  float64
+SEX                                 object
+FAMILY_HISTORY_OF_HEART_DISEASE     object
+CHEST_PAIN_TYPE                     object
+dtype: object
+2025-12-25 22:02:47,029 - app.routes - INFO - Processed input data: {'AGE': 78.0, 'CHOLESTEROL_MG_DL': 111.0, 'CIGARETTES_PER_DAY': 1.0, 'BLOOD_SUGAR_MG_DL': 55.0, 'SEX': 'FEMALE', 'FAMILY_HISTORY_OF_HEART_DISEASE': 'True', 'CHEST_PAIN_TYPE': 'non-anginal pain'}
+2025-12-25 22:02:47,029 - app.routes - INFO - Input data columns: ['AGE', 'CHOLESTEROL_MG_DL', 'CIGARETTES_PER_DAY', 'BLOOD_SUGAR_MG_DL', 'SEX', 'FAMILY_HISTORY_OF_HEART_DISEASE', 'CHEST_PAIN_TYPE']
+2025-12-25 22:02:47,029 - app.routes - INFO - Input data shape: (1, 7)
+2025-12-25 22:02:47,030 - app.routes - INFO - Input data dtypes: AGE                                float64
+CHOLESTEROL_MG_DL                  float64
+CIGARETTES_PER_DAY                 float64
+BLOOD_SUGAR_MG_DL                  float64
+SEX                                 object
+FAMILY_HISTORY_OF_HEART_DISEASE     object
+CHEST_PAIN_TYPE                     object
+dtype: object
+2025-12-25 22:02:47,037 - app.routes - INFO - Input data before prediction:
+    AGE  ...   CHEST_PAIN_TYPE
+0  78.0  ...  non-anginal pain
+
+[1 rows x 7 columns]
+2025-12-25 22:02:47,037 - app.routes - INFO - Making prediction...
+2025-12-25 22:02:47,069 - app.routes - INFO - Prediction successful. Class: 1, Probability: 0.5200
+2025-12-25 22:02:47,087 - app.routes - INFO - Feature importances:
+2025-12-25 22:02:47,088 - app.routes - INFO -   num__AGE: 0.2398
+2025-12-25 22:02:47,088 - app.routes - INFO -   num__CHOLESTEROL_MG_DL: 0.2260
+2025-12-25 22:02:47,088 - app.routes - INFO -   num__CIGARETTES_PER_DAY: 0.1176
+2025-12-25 22:02:47,089 - app.routes - INFO -   num__BLOOD_SUGAR_MG_DL: 0.2423
+2025-12-25 22:02:47,089 - app.routes - INFO -   cat__SEX_FEMALE: 0.0063
+2025-12-25 22:02:47,090 - app.routes - INFO -   cat__SEX_MALE: 0.0053
+2025-12-25 22:02:47,090 - app.routes - INFO -   cat__FAMILY_HISTORY_OF_HEART_DISEASE_False: 0.0675
+2025-12-25 22:02:47,090 - app.routes - INFO -   cat__FAMILY_HISTORY_OF_HEART_DISEASE_True: 0.0761
+2025-12-25 22:02:47,090 - app.routes - INFO -   cat__CHEST_PAIN_TYPE_asymptomatic: 0.0052
+2025-12-25 22:02:47,091 - app.routes - INFO -   cat__CHEST_PAIN_TYPE_non-anginal pain: 0.0078
+2025-12-25 22:02:47,091 - app.routes - INFO -   cat__CHEST_PAIN_TYPE_typical angina: 0.0061
+2025-12-25 22:02:47,091 - app.routes - INFO - Prediction result - Class: 1, Probability: 0.52
+2025-12-25 22:02:47,092 - app.routes - INFO - Sending response: {'success': True, 'prediction': 1, 'probability': 0.52, 'risk_level': 'High', 'message': 'High risk of heart disease detected', 'timestamp': '2025-12-25T22:02:47.092061'}
+2025-12-25 22:02:47,093 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2025 22:02:47] "POST /api/predict HTTP/1.1" 200 -
+2025-12-29 22:38:47,780 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-29 22:38:51,626 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-29 22:38:51,626 - app.routes - INFO - Model loaded successfully
+2025-12-29 22:38:51,779 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-29 22:38:51,780 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-29 22:38:51,782 - werkzeug - INFO -  * Restarting with stat
+2025-12-29 22:38:52,646 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-29 22:38:53,687 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-29 22:38:53,687 - app.routes - INFO - Model loaded successfully
+2025-12-29 22:38:53,699 - werkzeug - WARNING -  * Debugger is active!
+2025-12-29 22:38:53,710 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-29 22:38:58,635 - werkzeug - INFO - 127.0.0.1 - - [29/Dec/2025 22:38:58] "GET / HTTP/1.1" 200 -
+2025-12-29 22:38:59,997 - werkzeug - INFO - 127.0.0.1 - - [29/Dec/2025 22:38:59] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-29 22:39:21,752 - app.routes - INFO - 
+==================================================
+2025-12-29 22:39:21,752 - app.routes - INFO - New POST request to /api/predict
+2025-12-29 22:39:21,753 - app.routes - INFO - Headers: {'Host': '127.0.0.1:5000', 'Connection': 'keep-alive', 'Content-Length': '149', 'Sec-Ch-Ua-Platform': '"Windows"', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'Sec-Ch-Ua': '"Google Chrome";v="143", "Chromium";v="143", "Not A(Brand";v="24"', 'Content-Type': 'application/json', 'Sec-Ch-Ua-Mobile': '?0', 'Accept': '*/*', 'Origin': 'http://127.0.0.1:5000', 'Sec-Fetch-Site': 'same-origin', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Dest': 'empty', 'Referer': 'http://127.0.0.1:5000/', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'Accept-Language': 'en-US,en;q=0.9'}
+2025-12-29 22:39:21,753 - app.routes - INFO - Incoming data type: <class 'bytes'>
+2025-12-29 22:39:21,754 - app.routes - INFO - Raw data: b'{"age":"55","sex":"male","cholesterol":"111","cigarettes_per_day":"4","family_history":"true","chest_pain_type":"atypical angina","blood_sugar":"60"}'
+2025-12-29 22:39:21,754 - app.routes - INFO - Parsed JSON data: {'age': '55', 'sex': 'male', 'cholesterol': '111', 'cigarettes_per_day': '4', 'family_history': 'true', 'chest_pain_type': 'atypical angina', 'blood_sugar': '60'}
+2025-12-29 22:39:21,755 - app.routes - INFO - All required fields present
+2025-12-29 22:39:21,755 - app.routes - INFO - Starting prediction processing
+2025-12-29 22:39:21,755 - app.routes - INFO - Chest pain type: 'atypical angina' (original: 'atypical angina')
+2025-12-29 22:39:21,805 - app.routes - INFO - Input data before preprocessing:
+    AGE  ...  CHEST_PAIN_TYPE
+0  55.0  ...  atypical angina
+
+[1 rows x 7 columns]
+2025-12-29 22:39:21,807 - app.routes - INFO - Data types before preprocessing:
+AGE                                float64
+CHOLESTEROL_MG_DL                  float64
+CIGARETTES_PER_DAY                 float64
+BLOOD_SUGAR_MG_DL                  float64
+SEX                                 object
+FAMILY_HISTORY_OF_HEART_DISEASE     object
+CHEST_PAIN_TYPE                     object
+dtype: object
+2025-12-29 22:39:21,810 - app.routes - INFO - Processed input data: {'AGE': 55.0, 'CHOLESTEROL_MG_DL': 111.0, 'CIGARETTES_PER_DAY': 4.0, 'BLOOD_SUGAR_MG_DL': 60.0, 'SEX': 'MALE', 'FAMILY_HISTORY_OF_HEART_DISEASE': 'True', 'CHEST_PAIN_TYPE': 'atypical angina'}
+2025-12-29 22:39:21,810 - app.routes - INFO - Input data columns: ['AGE', 'CHOLESTEROL_MG_DL', 'CIGARETTES_PER_DAY', 'BLOOD_SUGAR_MG_DL', 'SEX', 'FAMILY_HISTORY_OF_HEART_DISEASE', 'CHEST_PAIN_TYPE']
+2025-12-29 22:39:21,811 - app.routes - INFO - Input data shape: (1, 7)
+2025-12-29 22:39:21,812 - app.routes - INFO - Input data dtypes: AGE                                float64
+CHOLESTEROL_MG_DL                  float64
+CIGARETTES_PER_DAY                 float64
+BLOOD_SUGAR_MG_DL                  float64
+SEX                                 object
+FAMILY_HISTORY_OF_HEART_DISEASE     object
+CHEST_PAIN_TYPE                     object
+dtype: object
+2025-12-29 22:39:21,822 - app.routes - INFO - Input data before prediction:
+    AGE  ...  CHEST_PAIN_TYPE
+0  55.0  ...  atypical angina
+
+[1 rows x 7 columns]
+2025-12-29 22:39:21,822 - app.routes - INFO - Making prediction...
+2025-12-29 22:39:21,871 - app.routes - INFO - Prediction successful. Class: 0, Probability: 0.1700
+2025-12-29 22:39:21,897 - app.routes - INFO - Feature importances:
+2025-12-29 22:39:21,898 - app.routes - INFO -   num__AGE: 0.2398
+2025-12-29 22:39:21,898 - app.routes - INFO -   num__CHOLESTEROL_MG_DL: 0.2260
+2025-12-29 22:39:21,898 - app.routes - INFO -   num__CIGARETTES_PER_DAY: 0.1176
+2025-12-29 22:39:21,898 - app.routes - INFO -   num__BLOOD_SUGAR_MG_DL: 0.2423
+2025-12-29 22:39:21,899 - app.routes - INFO -   cat__SEX_FEMALE: 0.0063
+2025-12-29 22:39:21,899 - app.routes - INFO -   cat__SEX_MALE: 0.0053
+2025-12-29 22:39:21,899 - app.routes - INFO -   cat__FAMILY_HISTORY_OF_HEART_DISEASE_False: 0.0675
+2025-12-29 22:39:21,900 - app.routes - INFO -   cat__FAMILY_HISTORY_OF_HEART_DISEASE_True: 0.0761
+2025-12-29 22:39:21,900 - app.routes - INFO -   cat__CHEST_PAIN_TYPE_asymptomatic: 0.0052
+2025-12-29 22:39:21,900 - app.routes - INFO -   cat__CHEST_PAIN_TYPE_non-anginal pain: 0.0078
+2025-12-29 22:39:21,900 - app.routes - INFO -   cat__CHEST_PAIN_TYPE_typical angina: 0.0061
+2025-12-29 22:39:21,901 - app.routes - INFO - Prediction result - Class: 0, Probability: 0.17
+2025-12-29 22:39:21,901 - app.routes - INFO - Sending response: {'success': True, 'prediction': 0, 'probability': 0.17, 'risk_level': 'Low', 'message': 'Low risk of heart disease', 'timestamp': '2025-12-29T22:39:21.901347'}
+2025-12-29 22:39:21,901 - werkzeug - INFO - 127.0.0.1 - - [29/Dec/2025 22:39:21] "POST /api/predict HTTP/1.1" 200 -
+2025-12-31 13:46:47,479 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-31 13:46:55,467 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-31 13:46:55,467 - app.routes - INFO - Model loaded successfully
+2025-12-31 13:46:55,537 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-31 13:46:55,537 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-31 13:46:55,539 - werkzeug - INFO -  * Restarting with stat
+2025-12-31 13:46:56,357 - app.routes - INFO - Attempting to load model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-31 13:46:57,387 - app.routes - INFO - Successfully loaded model from: C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\models\heart_disease_model.pkl
+2025-12-31 13:46:57,388 - app.routes - INFO - Model loaded successfully
+2025-12-31 13:46:57,400 - werkzeug - WARNING -  * Debugger is active!
+2025-12-31 13:46:57,416 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2025-12-31 13:47:05,350 - werkzeug - INFO - 127.0.0.1 - - [31/Dec/2025 13:47:05] "GET / HTTP/1.1" 200 -
+2025-12-31 13:47:31,739 - app.routes - INFO - 
+==================================================
+2025-12-31 13:47:31,739 - app.routes - INFO - New POST request to /api/predict
+2025-12-31 13:47:31,739 - app.routes - INFO - Headers: {'Host': '127.0.0.1:5000', 'Connection': 'keep-alive', 'Content-Length': '150', 'Sec-Ch-Ua-Platform': '"Windows"', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'Sec-Ch-Ua': '"Google Chrome";v="143", "Chromium";v="143", "Not A(Brand";v="24"', 'Content-Type': 'application/json', 'Sec-Ch-Ua-Mobile': '?0', 'Accept': '*/*', 'Origin': 'http://127.0.0.1:5000', 'Sec-Fetch-Site': 'same-origin', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Dest': 'empty', 'Referer': 'http://127.0.0.1:5000/', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'Accept-Language': 'en-US,en;q=0.9'}
+2025-12-31 13:47:31,740 - app.routes - INFO - Incoming data type: <class 'bytes'>
+2025-12-31 13:47:31,740 - app.routes - INFO - Raw data: b'{"age":"78","sex":"male","cholesterol":"111","cigarettes_per_day":"7","family_history":"true","chest_pain_type":"atypical angina","blood_sugar":"189"}'
+2025-12-31 13:47:31,741 - app.routes - INFO - Parsed JSON data: {'age': '78', 'sex': 'male', 'cholesterol': '111', 'cigarettes_per_day': '7', 'family_history': 'true', 'chest_pain_type': 'atypical angina', 'blood_sugar': '189'}
+2025-12-31 13:47:31,741 - app.routes - INFO - All required fields present
+2025-12-31 13:47:31,741 - app.routes - INFO - Starting prediction processing
+2025-12-31 13:47:31,741 - app.routes - INFO - Chest pain type: 'atypical angina' (original: 'atypical angina')
+2025-12-31 13:47:31,791 - app.routes - INFO - Input data before preprocessing:
+    AGE  ...  CHEST_PAIN_TYPE
+0  78.0  ...  atypical angina
+
+[1 rows x 7 columns]
+2025-12-31 13:47:31,793 - app.routes - INFO - Data types before preprocessing:
+AGE                                float64
+CHOLESTEROL_MG_DL                  float64
+CIGARETTES_PER_DAY                 float64
+BLOOD_SUGAR_MG_DL                  float64
+SEX                                 object
+FAMILY_HISTORY_OF_HEART_DISEASE     object
+CHEST_PAIN_TYPE                     object
+dtype: object
+2025-12-31 13:47:31,796 - app.routes - INFO - Processed input data: {'AGE': 78.0, 'CHOLESTEROL_MG_DL': 111.0, 'CIGARETTES_PER_DAY': 7.0, 'BLOOD_SUGAR_MG_DL': 189.0, 'SEX': 'MALE', 'FAMILY_HISTORY_OF_HEART_DISEASE': 'True', 'CHEST_PAIN_TYPE': 'atypical angina'}
+2025-12-31 13:47:31,797 - app.routes - INFO - Input data columns: ['AGE', 'CHOLESTEROL_MG_DL', 'CIGARETTES_PER_DAY', 'BLOOD_SUGAR_MG_DL', 'SEX', 'FAMILY_HISTORY_OF_HEART_DISEASE', 'CHEST_PAIN_TYPE']
+2025-12-31 13:47:31,797 - app.routes - INFO - Input data shape: (1, 7)
+2025-12-31 13:47:31,798 - app.routes - INFO - Input data dtypes: AGE                                float64
+CHOLESTEROL_MG_DL                  float64
+CIGARETTES_PER_DAY                 float64
+BLOOD_SUGAR_MG_DL                  float64
+SEX                                 object
+FAMILY_HISTORY_OF_HEART_DISEASE     object
+CHEST_PAIN_TYPE                     object
+dtype: object
+2025-12-31 13:47:31,810 - app.routes - INFO - Input data before prediction:
+    AGE  ...  CHEST_PAIN_TYPE
+0  78.0  ...  atypical angina
+
+[1 rows x 7 columns]
+2025-12-31 13:47:31,810 - app.routes - INFO - Making prediction...
+2025-12-31 13:47:31,847 - app.routes - INFO - Prediction successful. Class: 1, Probability: 0.9600
+2025-12-31 13:47:31,871 - app.routes - INFO - Feature importances:
+2025-12-31 13:47:31,871 - app.routes - INFO -   num__AGE: 0.2398
+2025-12-31 13:47:31,872 - app.routes - INFO -   num__CHOLESTEROL_MG_DL: 0.2260
+2025-12-31 13:47:31,872 - app.routes - INFO -   num__CIGARETTES_PER_DAY: 0.1176
+2025-12-31 13:47:31,872 - app.routes - INFO -   num__BLOOD_SUGAR_MG_DL: 0.2423
+2025-12-31 13:47:31,873 - app.routes - INFO -   cat__SEX_FEMALE: 0.0063
+2025-12-31 13:47:31,873 - app.routes - INFO -   cat__SEX_MALE: 0.0053
+2025-12-31 13:47:31,873 - app.routes - INFO -   cat__FAMILY_HISTORY_OF_HEART_DISEASE_False: 0.0675
+2025-12-31 13:47:31,873 - app.routes - INFO -   cat__FAMILY_HISTORY_OF_HEART_DISEASE_True: 0.0761
+2025-12-31 13:47:31,874 - app.routes - INFO -   cat__CHEST_PAIN_TYPE_asymptomatic: 0.0052
+2025-12-31 13:47:31,874 - app.routes - INFO -   cat__CHEST_PAIN_TYPE_non-anginal pain: 0.0078
+2025-12-31 13:47:31,874 - app.routes - INFO -   cat__CHEST_PAIN_TYPE_typical angina: 0.0061
+2025-12-31 13:47:31,875 - app.routes - INFO - Prediction result - Class: 1, Probability: 0.96
+2025-12-31 13:47:31,875 - app.routes - INFO - Sending response: {'success': True, 'prediction': 1, 'probability': 0.96, 'risk_level': 'High', 'message': 'High risk of heart disease detected', 'timestamp': '2025-12-31T13:47:31.875249'}
+2025-12-31 13:47:31,876 - werkzeug - INFO - 127.0.0.1 - - [31/Dec/2025 13:47:31] "POST /api/predict HTTP/1.1" 200 -
