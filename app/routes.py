@@ -19,10 +19,9 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Load the trained model
 def load_model():
+    """Load the trained model with enhanced error handling and validation."""
     try:
-        # Try multiple possible model locations
         possible_paths = [
             os.path.join(os.path.dirname(__file__), 'models', 'heart_disease_model.pkl'),
             os.path.join(os.getcwd(), 'app', 'models', 'heart_disease_model.pkl'),
@@ -34,8 +33,22 @@ def load_model():
             try:
                 if os.path.exists(path):
                     logger.info(f"Attempting to load model from: {path}")
+                    file_size = os.path.getsize(path)
+                    logger.info(f"Model file size: {file_size} bytes")
+                    
+                    # Try to load the model
                     model = joblib.load(path)
+                    
+                    # Verify the loaded object is a valid model
+                    if not hasattr(model, 'predict'):
+                        raise ValueError(f"Loaded object from {path} is not a valid scikit-learn model (missing predict method)")
+                    
+                    # Check if it's a pipeline and has the expected steps
+                    if hasattr(model, 'named_steps'):
+                        logger.info(f"Model is a pipeline with steps: {list(model.named_steps.keys())}")
+                    
                     logger.info(f"Successfully loaded model from: {path}")
+                    logger.info(f"Model type: {type(model).__name__}")
                     return model
             except Exception as e:
                 logger.warning(f"Failed to load model from {path}: {str(e)}")
@@ -48,6 +61,7 @@ def load_model():
     except Exception as e:
         logger.error(f"Error loading model: {str(e)}", exc_info=True)
         raise
+
 # Global variable to track if model is loaded
 model_loaded = False
 model = None
@@ -57,19 +71,22 @@ try:
     model = load_model()
     model_loaded = True
     logger.info("Model loaded successfully")
+    logger.info(f"Model has predict method: {hasattr(model, 'predict')}")
+    logger.info(f"Model has predict_proba method: {hasattr(model, 'predict_proba') if model_loaded else 'N/A'}")
 except Exception as e:
-    logger.error(f"Error loading model: {str(e)}")
+    logger.error(f"Error loading model: {str(e)}", exc_info=True)
     model_loaded = False
 
 @main.route('/')
 def home():
+    """Render the home page."""
     return render_template('index.html')
 
 @main.route('/api/predict', methods=['POST', 'OPTIONS'])
 def predict():
+    """Handle prediction requests with comprehensive error handling."""
     logger.info("\n" + "="*50)
     logger.info(f"New {request.method} request to /api/predict")
-    logger.info(f"Headers: {dict(request.headers)}")
     
     # Handle CORS preflight
     if request.method == 'OPTIONS':
@@ -81,32 +98,29 @@ def predict():
         return response
 
     try:
-        logger.info(f"Incoming data type: {type(request.get_data())}")
-        logger.info(f"Raw data: {request.get_data()}")
+        # Log request details
+        logger.info(f"Headers: {dict(request.headers)}")
+        logger.info(f"Content-Type: {request.content_type}")
         
-        if not model_loaded or model is None:
-            error_msg = 'Prediction model not loaded. Please contact support.'
+        # Get and validate input data
+        if not request.is_json:
+            error_msg = 'Request must be JSON'
             logger.error(error_msg)
-            response = jsonify({
+            return jsonify({
                 'success': False,
                 'error': error_msg
-            })
-            response.headers.add('Access-Control-Allow-Origin', '*')
-            return response, 500
+            }), 400
 
-        # Get and validate input data
         data = request.get_json()
         logger.info(f"Parsed JSON data: {data}")
         
         if not data:
             error_msg = 'No input data provided'
             logger.warning(error_msg)
-            response = jsonify({
+            return jsonify({
                 'success': False,
                 'error': error_msg
-            })
-            response.headers.add('Access-Control-Allow-Origin', '*')
-            return response, 400
+            }), 400
 
         # Validate required fields
         required_fields = ['age', 'sex', 'cholesterol', 'cigarettes_per_day', 
@@ -116,152 +130,139 @@ def predict():
         if missing_fields:
             error_msg = f'Missing required fields: {", ".join(missing_fields)}'
             logger.warning(f"{error_msg}. Received fields: {list(data.keys())}")
-            response = jsonify({
+            return jsonify({
                 'success': False,
                 'error': error_msg,
-                'missing_fields': missing_fields,
-                'received_fields': list(data.keys())
-            })
-            response.headers.add('Access-Control-Allow-Origin', '*')
-            return response, 400
+                'missing_fields': missing_fields
+            }), 400
 
         logger.info("All required fields present")
-        logger.info("Starting prediction processing")
         
-        # Map chest pain types to numerical values
-        chest_pain_map = {
-            'typical angina': 0,
-            'atypical angina': 1,
-            'non-anginal pain': 2,
-            'non-anginal': 2,  # Alternative format
-            'asymptomatic': 3,
-            'none': 3  # Alternative format
-        }
+        # Check if model is loaded
+        if not model_loaded or model is None:
+            error_msg = 'Prediction model not loaded. Please contact support.'
+            logger.error(error_msg)
+            return jsonify({
+                'success': False,
+                'error': error_msg
+            }), 500
 
-        # Get chest pain type with case-insensitive matching
-        chest_pain = str(data['chest_pain_type']).strip().lower()
-        logger.info(f"Chest pain type: '{chest_pain}' (original: '{data['chest_pain_type']}')")
-        
-        if chest_pain not in chest_pain_map:
-            logger.warning(f'Invalid chest pain type: {chest_pain}. Available types: {list(chest_pain_map.keys())}')
-            chest_pain = 'asymptomatic'  # Default value
-            logger.info(f'Using default chest pain type: {chest_pain}')
-        
+        # Process input data
         try:
-            # Prepare the input data with proper types and structure
-            sex = str(data['sex']).strip().lower()
-            is_male = sex in ['male', 'm', '1']
-            has_family_history = str(data['family_history']).strip().lower() in ['true', 'yes', 'y', '1']
-            
-            # Create DataFrame with the exact column names and structure expected by the model
-            input_data = pd.DataFrame({
-                'AGE': [float(data['age'])],
-                'CHOLESTEROL_MG_DL': [float(data['cholesterol'])],
-                'CIGARETTES_PER_DAY': [float(data['cigarettes_per_day'])],
-                'BLOOD_SUGAR_MG_DL': [float(data['blood_sugar'])],
-                'SEX': ['MALE' if is_male else 'FEMALE'],
-                'FAMILY_HISTORY_OF_HEART_DISEASE': [str(has_family_history)],
-                'CHEST_PAIN_TYPE': [chest_pain]
-            })
-            
-            logger.info(f"Input data before preprocessing:\n{input_data}")
-            logger.info(f"Data types before preprocessing:\n{input_data.dtypes}")
-            
-            logger.info(f"Processed input data: {input_data.to_dict(orient='records')[0]}")
-            logger.info(f"Input data columns: {input_data.columns.tolist()}")
-            logger.info(f"Input data shape: {input_data.shape}")
-            logger.info(f"Input data dtypes: {input_data.dtypes}")
-            
-            # Log the prepared input data
-            logger.info(f"Input data before prediction:\n{input_data}")
-            
+            # Map chest pain types to standardized format
+            chest_pain_map = {
+                'typical angina': 'typical angina',
+                'atypical angina': 'atypical angina',
+                'non-anginal pain': 'non-anginal pain',
+                'non-anginal': 'non-anginal pain',
+                'asymptomatic': 'asymptomatic',
+                'none': 'asymptomatic'
+            }
+
+            # Process chest pain type
+            chest_pain = str(data['chest_pain_type']).strip().lower()
+            chest_pain = chest_pain_map.get(chest_pain, 'asymptomatic')
+            logger.info(f"Processed chest pain type: {chest_pain}")
+
+            # Process other fields
+            try:
+                age = float(data['age'])
+                cholesterol = float(data['cholesterol'])
+                cigarettes_per_day = float(data['cigarettes_per_day'])
+                blood_sugar = float(data['blood_sugar'])
+                sex = 'MALE' if str(data['sex']).strip().lower() in ['male', 'm', '1'] else 'FEMALE'
+                has_family_history = str(data['family_history']).lower() in ['true', 'yes', 'y', '1']
+                
+                # Create input DataFrame with expected column names
+                input_data = pd.DataFrame([{
+                    'AGE': age,
+                    'CHOLESTEROL_MG_DL': cholesterol,
+                    'CIGARETTES_PER_DAY': cigarettes_per_day,
+                    'BLOOD_SUGAR_MG_DL': blood_sugar,
+                    'SEX': sex,
+                    'FAMILY_HISTORY_OF_HEART_DISEASE': has_family_history,
+                    'CHEST_PAIN_TYPE': chest_pain
+                }])
+                
+                logger.info(f"Processed input data:\n{input_data.to_string()}")
+                
+            except (ValueError, TypeError) as e:
+                error_msg = f"Invalid data format: {str(e)}"
+                logger.error(error_msg)
+                return jsonify({
+                    'success': False,
+                    'error': error_msg,
+                    'details': 'Please check that all fields contain valid values.'
+                }), 400
+
             # Make prediction
             logger.info("Making prediction...")
             try:
-                # Get prediction and probability
+                # Get prediction
                 prediction = model.predict(input_data)
-                probability = model.predict_proba(input_data)[0][1]  # Probability of heart disease
-                logger.info(f"Prediction successful. Class: {prediction[0]}, Probability: {probability:.4f}")
+                prediction = int(prediction[0])  # Convert numpy.int64 to Python int
                 
-                # Get feature importances if available
-                if hasattr(model.named_steps['classifier'], 'feature_importances_'):
-                    importances = model.named_steps['classifier'].feature_importances_
-                    feature_names = model.named_steps['preprocessor'].get_feature_names_out()
-                    logger.info("Feature importances:")
-                    for name, importance in zip(feature_names, importances):
-                        logger.info(f"  {name}: {importance:.4f}")
-                        
+                # Get probability if available
+                probability = None
+                if hasattr(model, 'predict_proba'):
+                    probability = float(model.predict_proba(input_data)[0][1])
+                
+                logger.info(f"Prediction result - Class: {prediction}, Probability: {probability}")
+
+                # Prepare response
+                response_data = {
+                    'success': True,
+                    'prediction': prediction,
+                    'probability': probability,
+                    'risk_level': 'High' if prediction == 1 else 'Low',
+                    'message': 'High risk of heart disease' if prediction == 1 else 'Low risk of heart disease',
+                    'timestamp': datetime.now().isoformat()
+                }
+                
+                logger.info(f"Prediction successful: {response_data}")
+                response = jsonify(response_data)
+                response.headers.add('Access-Control-Allow-Origin', '*')
+                return response
+
             except Exception as pred_error:
-                logger.error(f"Prediction failed: {str(pred_error)}", exc_info=True)
-                if hasattr(model, 'named_steps'):
-                    logger.info(f"Model steps: {list(model.named_steps.keys())}")
-                    if 'preprocessor' in model.named_steps:
-                        try:
-                            logger.info("Preprocessor transformers:")
-                            for name, transformer, columns in model.named_steps['preprocessor'].transformers_:
-                                logger.info(f"  {name}: {columns}")
-                        except Exception as e:
-                            logger.error(f"Error getting preprocessor info: {e}")
-                raise
-            logger.info(f'Prediction result - Class: {prediction[0]}, Probability: {probability:.2f}')
+                error_msg = f"Prediction failed: {str(pred_error)}"
+                logger.error(error_msg, exc_info=True)
+                return jsonify({
+                    'success': False,
+                    'error': 'Error making prediction',
+                    'details': str(pred_error) if current_app.debug else None
+                }), 500
 
-            # Prepare response
-            response_data = {
-                'success': True,
-                'prediction': int(prediction[0]),
-                'probability': float(probability),
-                'risk_level': 'High' if prediction[0] == 1 else 'Low',
-                'message': 'High risk of heart disease detected' if prediction[0] == 1 
-                          else 'Low risk of heart disease',
-                'timestamp': datetime.now().isoformat()
-            }
-            
-            logger.info(f"Sending response: {response_data}")
-            response = jsonify(response_data)
-            response.headers.add('Access-Control-Allow-Origin', '*')
-            return response
-
-        except (ValueError, KeyError) as ve:
-            error_msg = f'Error processing input data: {str(ve)}'
-            logger.error(error_msg, exc_info=True)
-            response = jsonify({
-                'success': False,
-                'error': error_msg,
-                'details': 'Please check that all fields contain valid values.',
-                'timestamp': datetime.now().isoformat()
-            })
-            response.headers.add('Access-Control-Allow-Origin', '*')
-            return response, 400
-            
         except Exception as e:
-            error_msg = f'Prediction error: {str(e)}'
+            error_msg = f"Error processing input data: {str(e)}"
             logger.error(error_msg, exc_info=True)
-            response = jsonify({
+            return jsonify({
                 'success': False,
-                'error': 'Error making prediction',
-                'details': str(e) if current_app.debug else None,
-                'timestamp': datetime.now().isoformat()
-            })
-            response.headers.add('Access-Control-Allow-Origin', '*')
-            return response, 500
+                'error': 'Error processing input data',
+                'details': str(e) if current_app.debug else None
+            }), 400
 
     except Exception as e:
-        error_msg = f'Server error: {str(e)}'
+        error_msg = f"Unexpected error: {str(e)}"
         logger.critical(error_msg, exc_info=True)
-        response = jsonify({
+        return jsonify({
             'success': False,
             'error': 'Internal server error',
-            'details': str(e) if current_app.debug else None,
-            'timestamp': datetime.now().isoformat()
-        })
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        return response, 500
+            'details': str(e) if current_app.debug else None
+        }), 500
 
 @main.route('/api/health')
 def health_check():
+    """Health check endpoint to verify service status."""
+    model_info = {
+        'loaded': model_loaded,
+        'type': str(type(model).__name__) if model_loaded else 'None',
+        'has_predict': hasattr(model, 'predict') if model_loaded else False,
+        'has_predict_proba': hasattr(model, 'predict_proba') if model_loaded else False
+    }
+    
     return jsonify({
         'status': 'healthy',
-        'model_loaded': model_loaded,
-        'model_type': str(type(model)) if model is not None else 'None',
+        'model': model_info,
         'timestamp': datetime.now().isoformat()
     })
