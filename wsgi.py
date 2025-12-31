@@ -6,8 +6,11 @@ project_root = os.path.dirname(os.path.abspath(__file__))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-# Now import the app
-from app import app as application
+# Import the create_app function from the app package
+from app import create_app
+
+# Create the application instance
+application = create_app()
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
