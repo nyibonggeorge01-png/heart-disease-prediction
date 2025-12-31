@@ -6,7 +6,8 @@ services:
       os: ubuntu22.04
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11.0
+        value: 3.9.18
     buildCommand: |
+      python -m pip install --upgrade pip
       pip install -r requirements.txt
     startCommand: gunicorn wsgi:app

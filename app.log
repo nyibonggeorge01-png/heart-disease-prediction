@@ -818,3 +818,76 @@ dtype: object
 2025-12-31 18:05:55,625 - app.routes - INFO - Model loaded successfully
 2025-12-31 18:05:55,651 - werkzeug - WARNING -  * Debugger is active!
 2025-12-31 18:05:55,664 - werkzeug - INFO -  * Debugger PIN: 136-067-875
+2026-01-01 01:27:58,568 - app.routes - INFO - Model loaded successfully
+2026-01-01 01:27:58,575 - app.routes - INFO - Model has predict method: True
+2026-01-01 01:27:58,576 - app.routes - INFO - Model has predict_proba method: True
+2026-01-01 01:27:58,634 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-01-01 01:27:58,634 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-01-01 01:27:58,637 - werkzeug - INFO -  * Restarting with stat
+2026-01-01 01:28:00,751 - app.routes - INFO - Model loaded successfully
+2026-01-01 01:28:00,751 - app.routes - INFO - Model has predict method: True
+2026-01-01 01:28:00,752 - app.routes - INFO - Model has predict_proba method: True
+2026-01-01 01:28:00,780 - werkzeug - WARNING -  * Debugger is active!
+2026-01-01 01:28:00,786 - werkzeug - INFO -  * Debugger PIN: 111-877-569
+2026-01-01 01:28:12,842 - werkzeug - INFO - 127.0.0.1 - - [01/Jan/2026 01:28:12] "GET / HTTP/1.1" 200 -
+2026-01-01 01:28:15,440 - werkzeug - INFO - 127.0.0.1 - - [01/Jan/2026 01:28:15] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-01-01 01:28:38,436 - app.routes - INFO - 
+==================================================
+2026-01-01 01:28:38,436 - app.routes - INFO - New POST request to /api/predict
+2026-01-01 01:28:38,436 - app.routes - INFO - Headers: {'Host': '127.0.0.1:5000', 'Connection': 'keep-alive', 'Content-Length': '148', 'Sec-Ch-Ua-Platform': '"Windows"', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'Sec-Ch-Ua': '"Google Chrome";v="143", "Chromium";v="143", "Not A(Brand";v="24"', 'Content-Type': 'application/json', 'Sec-Ch-Ua-Mobile': '?0', 'Accept': '*/*', 'Origin': 'http://127.0.0.1:5000', 'Sec-Fetch-Site': 'same-origin', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Dest': 'empty', 'Referer': 'http://127.0.0.1:5000/', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'Accept-Language': 'en-US,en;q=0.9'}
+2026-01-01 01:28:38,437 - app.routes - INFO - Content-Type: application/json
+2026-01-01 01:28:38,437 - app.routes - INFO - Parsed JSON data: {'age': '78', 'sex': 'female', 'cholesterol': '111', 'cigarettes_per_day': '1', 'family_history': 'true', 'chest_pain_type': 'asymptomatic', 'blood_sugar': '54'}
+2026-01-01 01:28:38,437 - app.routes - INFO - All required fields present
+2026-01-01 01:28:38,438 - app.routes - INFO - Processed chest pain type: asymptomatic
+2026-01-01 01:28:38,452 - app.routes - INFO - Processed input data:
+    AGE  CHOLESTEROL_MG_DL  CIGARETTES_PER_DAY  BLOOD_SUGAR_MG_DL     SEX  FAMILY_HISTORY_OF_HEART_DISEASE CHEST_PAIN_TYPE
+0  78.0              111.0                 1.0               54.0  FEMALE                             True    asymptomatic
+2026-01-01 01:28:38,453 - app.routes - INFO - Making prediction...
+2026-01-01 01:28:38,455 - app.routes - ERROR - Prediction failed: columns are missing: {'FAMILY_HISTORY', 'BLOOD_SUGAR', 'CHOLESTEROL'}
+Traceback (most recent call last):
+  File "C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\app\routes.py", line 226, in predict
+    prediction = model.predict(input_data)
+  File "C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\venv39\Lib\site-packages\sklearn\pipeline.py", line 745, in predict
+    Xt = transform.transform(Xt)
+  File "C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\venv39\Lib\site-packages\sklearn\utils\_set_output.py", line 316, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "C:\Users\MY PC\Documents\ML_working\heart-disease-prediction\venv39\Lib\site-packages\sklearn\compose\_column_transformer.py", line 1088, in transform
+    raise ValueError(f"columns are missing: {diff}")
+ValueError: columns are missing: {'FAMILY_HISTORY', 'BLOOD_SUGAR', 'CHOLESTEROL'}
+2026-01-01 01:28:38,533 - werkzeug - INFO - 127.0.0.1 - - [01/Jan/2026 01:28:38] "[35m[1mPOST /api/predict HTTP/1.1[0m" 500 -
+2026-01-01 01:31:20,071 - werkzeug - INFO -  * Detected change in 'C:\\Users\\MY PC\\Documents\\ML_working\\heart-disease-prediction\\app\\routes.py', reloading
+2026-01-01 01:31:20,540 - werkzeug - INFO -  * Restarting with stat
+2026-01-01 01:31:24,841 - app.routes - INFO - Model loaded successfully
+2026-01-01 01:31:24,841 - app.routes - INFO - Model has predict method: True
+2026-01-01 01:31:24,842 - app.routes - INFO - Model has predict_proba method: True
+2026-01-01 01:31:24,872 - werkzeug - WARNING -  * Debugger is active!
+2026-01-01 01:31:24,877 - werkzeug - INFO -  * Debugger PIN: 111-877-569
+2026-01-01 01:31:42,963 - app.routes - INFO - Model loaded successfully
+2026-01-01 01:31:42,963 - app.routes - INFO - Model has predict method: True
+2026-01-01 01:31:42,963 - app.routes - INFO - Model has predict_proba method: True
+2026-01-01 01:31:42,999 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-01-01 01:31:43,000 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-01-01 01:31:43,003 - werkzeug - INFO -  * Restarting with stat
+2026-01-01 01:31:45,222 - app.routes - INFO - Model loaded successfully
+2026-01-01 01:31:45,222 - app.routes - INFO - Model has predict method: True
+2026-01-01 01:31:45,223 - app.routes - INFO - Model has predict_proba method: True
+2026-01-01 01:31:45,241 - werkzeug - WARNING -  * Debugger is active!
+2026-01-01 01:31:45,245 - werkzeug - INFO -  * Debugger PIN: 111-877-569
+2026-01-01 01:32:28,356 - werkzeug - INFO - 127.0.0.1 - - [01/Jan/2026 01:32:28] "GET / HTTP/1.1" 200 -
+2026-01-01 01:32:49,732 - app.routes - INFO - 
+==================================================
+2026-01-01 01:32:49,733 - app.routes - INFO - New POST request to /api/predict
+2026-01-01 01:32:49,733 - app.routes - INFO - Headers: {'Host': '127.0.0.1:5000', 'Connection': 'keep-alive', 'Content-Length': '152', 'Sec-Ch-Ua-Platform': '"Windows"', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'Sec-Ch-Ua': '"Google Chrome";v="143", "Chromium";v="143", "Not A(Brand";v="24"', 'Content-Type': 'application/json', 'Sec-Ch-Ua-Mobile': '?0', 'Accept': '*/*', 'Origin': 'http://127.0.0.1:5000', 'Sec-Fetch-Site': 'same-origin', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Dest': 'empty', 'Referer': 'http://127.0.0.1:5000/', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'Accept-Language': 'en-US,en;q=0.9'}
+2026-01-01 01:32:49,734 - app.routes - INFO - Content-Type: application/json
+2026-01-01 01:32:49,734 - app.routes - INFO - Parsed JSON data: {'age': '78', 'sex': 'female', 'cholesterol': '111', 'cigarettes_per_day': '1', 'family_history': 'false', 'chest_pain_type': 'atypical angina', 'blood_sugar': '55'}
+2026-01-01 01:32:49,734 - app.routes - INFO - All required fields present
+2026-01-01 01:32:49,735 - app.routes - INFO - Processed chest pain type: atypical angina
+2026-01-01 01:32:49,741 - app.routes - INFO - Processed input data:
+    AGE  CHOLESTEROL  CIGARETTES_PER_DAY  BLOOD_SUGAR     SEX  FAMILY_HISTORY  CHEST_PAIN_TYPE
+0  78.0        111.0                 1.0         55.0  FEMALE           False  atypical angina
+2026-01-01 01:32:49,741 - app.routes - INFO - Making prediction...
+2026-01-01 01:32:49,783 - app.routes - INFO - Prediction result - Class: 0, Probability: 0.17
+2026-01-01 01:32:49,784 - app.routes - INFO - Prediction successful: {'success': True, 'prediction': 0, 'probability': 0.17, 'risk_level': 'Low', 'message': 'Low risk of heart disease', 'timestamp': '2026-01-01T01:32:49.784081'}
+2026-01-01 01:32:49,784 - werkzeug - INFO - 127.0.0.1 - - [01/Jan/2026 01:32:49] "POST /api/predict HTTP/1.1" 200 -

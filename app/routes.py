@@ -200,11 +200,11 @@ def predict():
                 # Create input DataFrame with expected column names
                 input_data = pd.DataFrame([{
                     'AGE': age,
-                    'CHOLESTEROL_MG_DL': cholesterol,
+                    'CHOLESTEROL': cholesterol,
                     'CIGARETTES_PER_DAY': cigarettes_per_day,
-                    'BLOOD_SUGAR_MG_DL': blood_sugar,
+                    'BLOOD_SUGAR': blood_sugar,
                     'SEX': sex,
-                    'FAMILY_HISTORY_OF_HEART_DISEASE': has_family_history,
+                    'FAMILY_HISTORY': has_family_history,
                     'CHEST_PAIN_TYPE': chest_pain
                 }])
                 
